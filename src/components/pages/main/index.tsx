@@ -1,35 +1,40 @@
 import { Link } from "react-router-dom";
-import styles from "./index.module.scss";
-import { UserRequestCard } from "../../userRequestCard";
+
 import { useClubStore } from "../../../data/stores/useClubStore";
 import { ListUserRequest } from "../../listUserRequests";
+
+import styles from "./index.module.scss";
+import { Header } from "../../header";
+import { CustomButton } from "../../CustomButton";
 
 interface Props {}
 
 export const Main: React.FC<Props> = () => {
-
-  const [requests, deleteUserRequest] = useClubStore((state) => [state.requests, state.deleteUserRequest])
+  const [requests] = useClubStore((state) => [state.requests]);
 
   return (
-    <div className={styles.Main}>
-      
-      <div>
-
+    <div>
+      <Header/>
+      <div className={styles.Main}>
         <div>
-          Мои записи
-          {requests.length != 0 ? (
-            <div>
-              <ListUserRequest/>
+          <div className={styles.Title}>
+            Мои записи
             </div>
-          ) : (
-            <div>
-              <Link to="/req">
-                <button>Забронировать</button>
-              </Link>
+            <div className={styles.Content}>
+              {requests.length != 0 ? (
+                <div>
+                  <ListUserRequest />
+                </div>
+              ) : (
+                <div>
+                  <Link to="/req">
+                    <CustomButton title='Забронировать' type="Upload"/>
+                  </Link>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
-    </div>
   );
 };

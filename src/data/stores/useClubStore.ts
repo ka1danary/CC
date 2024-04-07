@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import data from "../data.json";
+import { generateId } from "../helper";
 
 interface RequestObject {
   id: string;
@@ -12,18 +13,29 @@ interface RequestObject {
 interface requestStore {
   requests: RequestObject[];
   createUserRequest: (
-    deviceType: string,
+    deviceType: "PC" | "PS" | "VR",
     date: Date,
-    sessionTime: string,
+    sessionTime: 1 | 2 | 3,
     place: string
   ) => void;
-  deleteUserRequest: (id: string) => void;
+  deleteUserRequest: (id: string) => void;  
+  
 }
 
 export const useClubStore = create<requestStore>((set, get) => ({
     requests : data,
     createUserRequest : (deviceType, date, sessionTime, place) => {
-
+      const {requests} = get()
+      const newRequest = {
+        id : generateId(),
+        deviceType,
+        date,
+        sessionTime,
+        place
+      }
+      set({
+        requests : [newRequest, ...requests]
+      })
     },
     deleteUserRequest : (id) => {
         const {requests} = get()

@@ -1,18 +1,22 @@
 .Header {
     background-color: #2e2e2e;
+    position: sticky;
     color : white;
     display: flex;
-    width: 95vw;
+    width: 100vw;
     align-items: center;
-    justify-content: space-between;
     height: 7vh;
-    padding: 10px;
 
-    &LeftSide {
+    &Logo {
         display: flex;
-        width: 20vw;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        width: 100vw;
+        margin-left: 30px;
     }
 
+    &Right {
+        margin-right: 30px;
+        
+    }
 }

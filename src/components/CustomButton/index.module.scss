@@ -1,0 +1,27 @@
+.CustomButton {}
+
+.Upload {
+    color: white;
+    background-color: #2e2e2e;
+    padding: 20px;
+    font-size: 1.3em;
+    border-radius: 10px;
+    transition: opacity 0.3s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.White {
+    color: #2e2e2e;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    transition: opacity 0.3s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

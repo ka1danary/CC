@@ -5,6 +5,7 @@ import { Main } from "../components/pages/main";
 import { Request } from "../components/pages/request";
 
 import styles from "./index.module.scss";
+import { Header } from "../components/header";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -26,6 +27,7 @@ function App() {
   return (
     <div>
       <div className={styles.App}>
+        
         <Routes>
           <Route element={<Main/>} path="/"/>
           <Route element={<Authorization setAuth={handleLogin}/>} path="/auth"/>
