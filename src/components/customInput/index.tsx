@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 
 interface Props {
@@ -13,16 +14,21 @@ export const CustomInput: React.FC<Props> = ({
   setValue,
   value,
   type,
-  width
+  width,
 }) => {
+  
+
   return (
-    <input
-      placeholder={placeholder}
-      className={styles.CustomInput}
-      onChange={(e) => setValue(e.target.value)}
-      value={value}
-      type={type}
-      style={{width : width}}
-    />
+    <div className={styles.Content}>
+      <input
+        placeholder={placeholder}
+        className={styles.CustomInput}
+        onChange={(e) => setValue(e.target.value)}
+        value={value}
+        type={type}
+        style={{ width: width }}
+      />
+      
+    </div>
   );
 };

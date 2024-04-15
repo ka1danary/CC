@@ -1,6 +1,23 @@
 .UserRequestCard {
-    border: 1px solid #2e2e2e;
-    padding: 20px;
+    border: 1px solid #c7c7c7;
+    padding: 30px;
+    border-radius: 10px;
     
-    
+}
+.DeleteButton {
+    margin-bottom: 20px;
+}
+
+.Content {
+    font-size: 1.3em;
+    color : #2e2e2e;
+    &Box {
+        display: flex;
+        align-items: center;
+        &Title {
+            margin-right: 15px;
+            color : #807e7e;
+            font-weight: 500;
+        }
+    }
 }
