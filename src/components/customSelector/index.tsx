@@ -9,6 +9,16 @@ interface Props {
 export const CustomSelector: React.FC<Props> = ({title, options, setOption}) => {
     return (
         <form className={styles.CustomSelector}>
+            <div>
+                {title}
+            </div>
+            <div>
+                {options.map((el, index) => (
+                    <div key={index}>
+                        {el}
+                    </div>
+                ))}
+            </div>
             <select>
                 <option disabled selected>
                     {title}

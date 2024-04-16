@@ -1,36 +1,20 @@
 {
-    "users": [
-        {
-            "id": "1",
-            "requestID": "1",
-            "login": "admin",
-            "isAuth" : "true"
-        },
-        {
-            "id": "2",
-            "requestID": "2",
-            "login": "new_user",
-            "isAuth" : "false"
-        }
-    ],
-    "req": [
-        {
-            "id": "1",
-            "deviceType": "PC",
-            "date": "2024-04-15T00:00:00.000Z",
-            "package": 1,
-            "place" : 3
-        },
-        {
-            "id": "2",
-            "deviceType": "PS",
-            "date": "2024-05-15T00:00:00.000Z",
-            "package": 2,
-            "place" : 5
-        }
-        
-    ],
-    "profile": {
-        "name": "typicode"
+  "users": [
+    {
+      "id": "1",
+      "requestId": "1",
+      "login": "admin",
+      "isAuth": "true"
+    },
+    {
+      "id": "2",
+      "requestId": "2",
+      "login": "new_user",
+      "isAuth": "false"
     }
+  ],
+  "req": [],
+  "profile": {
+    "name": "typicode"
+  }
 }

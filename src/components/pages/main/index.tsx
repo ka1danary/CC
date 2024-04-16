@@ -1,44 +1,52 @@
-import { Link } from "react-router-dom";
-import { ListUserRequest } from "../../listUserRequests";
-
 import styles from "./index.module.scss";
+import { useEffect, useState } from "react";
 import { Header } from "../../header";
+import { UserRequestCard } from "../../userRequestCard";
+
+import { userApi, requestAPI } from "../../../store/service/RequestService";
 import { CustomButton } from "../../CustomButton";
-import { requestAPI } from "../../../store/service/RequestService";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
 export const Main: React.FC<Props> = () => {
-  
-  const { data: request } = requestAPI.useFetchRequestQuery(10) 
+  const { data: user } = userApi.useFetchUserQuery(1);
+  const { data: request } = requestAPI.useFetchRequestQuery(user);
+
+  const [isEmpty, setIsEmpty] = useState(false);
+
+  const checkRequest = () => {
+    if (request === undefined || isEmpty) {
+      console.log(false);
+      return false;
+    } else {
+      console.log(true);
+      return true;
+    }
+  };
+
+  useEffect(() => {
+    checkRequest();
+  }, []);
+
   return (
     <div>
-      <Header/>
+      <Header />
       <div className={styles.Main}>
         <div>
-          <div className={styles.Title}>
-            Мои записи
+          <div className={styles.Title}>Мои записи</div>
+          {checkRequest() ? (
+            <UserRequestCard request={request} isEmpty={setIsEmpty} />
+          ) : (
+            <div>
+              <Link to="/create">
+                <CustomButton type={"Upload"} title="Создать" />
+              </Link>
             </div>
-            {request?.map(el => (
-              <div>
-                {el.id}
-              </div>
-            ))}
-            <div className={styles.Content}>
-              {/* {requests.length != 0 ? (
-                <div>
-                  <ListUserRequest />
-                </div>
-              ) : (
-                <div>
-                  <Link to="/req">
-                    <CustomButton title='Забронировать' type="Upload"/>
-                  </Link>
-                </div>
-              )} */}
-            </div>
-          </div>
+          )}
+          <div className={styles.Content}></div>
         </div>
       </div>
+    </div>
   );
 };

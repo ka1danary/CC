@@ -17,6 +17,11 @@
 
     &Right {
         margin-right: 30px;
-        
+        display: flex;
+        align-items: center;
+        &Login {
+            margin-right: 20px;
+            color: white;
+        }
     }
 }

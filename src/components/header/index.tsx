@@ -1,10 +1,15 @@
 
 import { Link } from "react-router-dom";
+import { userApi } from "../../store/service/RequestService";
+
 import styles from "./index.module.scss";
 
 interface Props {}
 
 export const Header: React.FC<Props> = () => {
+
+  const {data : user} = userApi.useFetchUserQuery(1)
+
   return (
     <div className={styles.Header}>
       
@@ -26,6 +31,9 @@ export const Header: React.FC<Props> = () => {
       </div>
       <Link to='/auth'>
       <button className={styles.HeaderRight}>
+        <div className={styles.HeaderRightLogin}>
+          {user?.login}
+        </div>
         <svg
           width="18"
           height="18"

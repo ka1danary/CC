@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Authorization } from "../components/pages/authorization";
 import { Main } from "../components/pages/main";
-import { Request } from "../components/pages/request";
+import { Request } from "../components/pages/create";
 
 import styles from "./index.module.scss";
 
@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route element={<Main/>} path="/"/>
           <Route element={<Authorization setAuth={handleLogin}/>} path="/auth"/>
-          <Route path="/req" element={<Request />} />
+          <Route path="/create" element={<Request />} />
         </Routes>
       </div>
     </div>
