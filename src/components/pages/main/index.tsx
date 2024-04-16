@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
-
-import { useClubStore } from "../../../data/stores/useClubStore";
 import { ListUserRequest } from "../../listUserRequests";
 
 import styles from "./index.module.scss";
 import { Header } from "../../header";
 import { CustomButton } from "../../CustomButton";
+import { requestAPI } from "../../../store/service/RequestService";
 
 interface Props {}
 
 export const Main: React.FC<Props> = () => {
-  const [requests] = useClubStore((state) => [state.requests]);
-
+  
+  const { data: request } = requestAPI.useFetchRequestQuery(10) 
   return (
     <div>
       <Header/>
@@ -20,8 +19,13 @@ export const Main: React.FC<Props> = () => {
           <div className={styles.Title}>
             Мои записи
             </div>
+            {request?.map(el => (
+              <div>
+                {el.id}
+              </div>
+            ))}
             <div className={styles.Content}>
-              {requests.length != 0 ? (
+              {/* {requests.length != 0 ? (
                 <div>
                   <ListUserRequest />
                 </div>
@@ -31,7 +35,7 @@ export const Main: React.FC<Props> = () => {
                     <CustomButton title='Забронировать' type="Upload"/>
                   </Link>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

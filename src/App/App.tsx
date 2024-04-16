@@ -5,7 +5,7 @@ import { Main } from "../components/pages/main";
 import { Request } from "../components/pages/request";
 
 import styles from "./index.module.scss";
-import { Header } from "../components/header";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);

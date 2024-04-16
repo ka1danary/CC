@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import styles from "./index.module.scss";
+import styles from './index.module.scss'
 
 interface Props {
   placeholder?: string | undefined;
