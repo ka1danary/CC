@@ -12,25 +12,28 @@ import { IRequest } from "../../../store/models/IRequest";
 import { requestAPI } from "../../../store/service/RequestService";
 
 import styles from "./index.module.scss";
+import { PlaceTypeOne } from "../../placeTypeOne";
 
 interface Props {}
 
 export const Request: React.FC<Props> = () => {
 
-  const [sendRequest, {data, error}] = requestAPI.useCreateRequestMutation()
+  const [sendRequest] = requestAPI.useCreateRequestMutation()
 
   const [page, setPage] = useState<number>(0);
   const [buttonBackDisable, setButtonBackDisable] = useState<boolean>(true);
   const [buttonForwardDisable, setButtonForwardDisable] =
     useState<boolean>(false);
 
-  const [deviceType, setDeviceType] = useState<deviceType>('PC');
-  const [date, setDate] = useState<Date>(new Date());
-  const [time, setTime] = useState<number>(8);
-  const [packageType, setpackageType] = useState<packageType>(2);
-  const [place, setPlace] = useState<number>(1);
+  const [deviceType, setDeviceType] = useState<deviceType>();
+  const [date, setDate] = useState<Date | undefined>();
+  const [time, setTime] = useState<number | undefined>(8);
+  const [packageType, setpackageType] = useState<packageType | undefined>(2);
+  const [place, setPlace] = useState<number | undefined>(1);
 
   const [newRequest, setNewRequest] = useState<IRequest>();
+
+
 
   useEffect(() => {
     if (page != 0) {
@@ -48,10 +51,10 @@ export const Request: React.FC<Props> = () => {
 
   const createRequeset = (
     deviceType: deviceType,
-    date: Date,
-    time: number,
+    date: Date | undefined,
+    time: number | undefined,
     packageType: packageType,
-    place: number
+    place: number | undefined
   ) => {
     if ((deviceType && date && time && packageType && place) != undefined) {
       const newRequest: IRequest = {
@@ -63,8 +66,8 @@ export const Request: React.FC<Props> = () => {
         place,
       };
       setNewRequest(newRequest);
+
       sendRequest(newRequest)
-      console.log('rrr', error)
     }
   };
 
@@ -97,7 +100,11 @@ export const Request: React.FC<Props> = () => {
     } else if (page === 2) {
       return (
         <div>
-          <div>Укажите место</div>
+          <div>Укажите место {place}</div>
+          <div>
+
+            <PlaceTypeOne value={place} setValue={setPlace} options={[1,2,3,4,5,6,7,8,9,0]}/>
+          </div>
         </div>
       );
     } else if (page === 3) {
@@ -105,6 +112,7 @@ export const Request: React.FC<Props> = () => {
         <div>
           <div>Ваша заявка</div>
           <div>
+            
             <CreateRequestCard
               request={{ id : 1, date, time, packageType, deviceType, place }}
             />

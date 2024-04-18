@@ -16,14 +16,19 @@ export const Main: React.FC<Props> = () => {
   const [isEmpty, setIsEmpty] = useState(false);
 
   const checkRequest = () => {
-    if (request === undefined || isEmpty) {
+    if (isEmpty && (request != undefined)) {
       console.log(false);
       return false;
     } else {
       console.log(true);
+      console.log(request)
       return true;
     }
   };
+
+  useEffect(() => {
+    checkRequest();
+  }, [request]);
 
   useEffect(() => {
     checkRequest();

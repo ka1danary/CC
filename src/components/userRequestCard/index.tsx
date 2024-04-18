@@ -12,19 +12,21 @@ interface Props {
 
 export const UserRequestCard: React.FC< Props> = ({request, isEmpty}) => {
  
-  const [deleteRequest, {}] = requestAPI.useDeleteRequestMutation();
+  const [deleteRequest] = requestAPI.useDeleteRequestMutation();
 
   const handleRemove = (event: React.MouseEvent) => {
     event.stopPropagation()
     isEmpty(true)
     console.log(request?.id)
     deleteRequest(request)
+    console.log(request)
   }
 
   const convertDate = () => {
     const date = request?.date;
     if( date != undefined) {
-      format(date, { date: "full", time: "short" })
+      return (format(date, { date: "full", time: "short" }))
+      console.log(9)
     }
     else {
       return ''
@@ -47,7 +49,7 @@ export const UserRequestCard: React.FC< Props> = ({request, isEmpty}) => {
         </div>
         <div className={styles.ContentBox}>
           <div className={styles.ContentBoxTitle}> Длительность: </div>
-          <div> {request?.package} ч</div>
+          <div> {request?.packageType} ч</div>
         </div>
         <div className={styles.ContentBox}>
           <div className={styles.ContentBoxTitle}> Место: </div>

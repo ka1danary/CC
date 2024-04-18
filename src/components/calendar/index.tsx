@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  date: Date;
+  date: Date | undefined;
   setDate: (date: Date) => void; 
 }
 

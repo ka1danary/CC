@@ -1,9 +1,10 @@
+import { deviceType, packageType } from "./IModel";
 
 export interface IRequest {
-    id : number,
-    deviceType : "PC" | "PS" | "VR",
-    date : Date,
-    time: number,
-    packageType : 1 | 2  | 3,
-    place : number
+    id : number | undefined,
+    deviceType : deviceType | undefined,
+    date : Date | undefined,
+    time: number | undefined,
+    packageType : packageType | undefined,
+    place : number | undefined
 }

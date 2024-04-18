@@ -10,7 +10,7 @@ export const CreateRequestCard: React.FC<Props> = ({request}) => {
             <div>
                 <div>
                     <div>Дата</div>
-                    <div>{request.date.getDate()}</div>
+                    <div>{request.date?.getDay()}</div>
                 </div>
                 <div>
                     <div>Тип</div>
