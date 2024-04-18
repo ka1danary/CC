@@ -13,7 +13,16 @@
       "isAuth": "false"
     }
   ],
-  "req": [],
+  "req": [
+    {
+      "id": 1,
+      "deviceType": "PC",
+      "date": "2024-04-18T02:49:25.875Z",
+      "time": 14,
+      "packageType": 2,
+      "place": 1
+    }
+  ],
   "profile": {
     "name": "typicode"
   }
