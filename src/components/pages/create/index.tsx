@@ -17,8 +17,7 @@ import { PlaceTypeOne } from "../../placeTypeOne";
 interface Props {}
 
 export const Request: React.FC<Props> = () => {
-
-  const [sendRequest] = requestAPI.useCreateRequestMutation()
+  const [sendRequest] = requestAPI.useCreateRequestMutation();
 
   const [page, setPage] = useState<number>(0);
   const [buttonBackDisable, setButtonBackDisable] = useState<boolean>(true);
@@ -27,25 +26,37 @@ export const Request: React.FC<Props> = () => {
 
   const [deviceType, setDeviceType] = useState<deviceType>();
   const [date, setDate] = useState<Date | undefined>();
-  const [time, setTime] = useState<number | undefined>(8);
+  const [time, setTime] = useState<number | undefined>();
   const [packageType, setpackageType] = useState<packageType | undefined>(2);
-  const [place, setPlace] = useState<number | undefined>(1);
+  const [place, setPlace] = useState<number | undefined>();
 
-  const [newRequest, setNewRequest] = useState<IRequest>();
+  const [leftArrowColor, setLeftArrowColor] = useState<string>("black")
+  const [rightArrowColor, setRightArrowColor] = useState<string>("black")
 
+  const incrementPage = () => {
+    setPage(page + 1);
+  };
 
+  const decrementPage = () => {
+    setPage(page - 1);
+  };
 
   useEffect(() => {
     if (page != 0) {
       setButtonBackDisable(false);
+      setLeftArrowColor("black")
+     
     } else {
       setButtonBackDisable(true);
+      setLeftArrowColor("gray")
     }
 
     if (page != 3) {
       setButtonForwardDisable(false);
+      setRightArrowColor("black")
     } else {
       setButtonForwardDisable(true);
+      setRightArrowColor("gray")
     }
   }, [page]);
 
@@ -58,68 +69,77 @@ export const Request: React.FC<Props> = () => {
   ) => {
     if ((deviceType && date && time && packageType && place) != undefined) {
       const newRequest: IRequest = {
-        id: 2,
+        id: 1,
         deviceType,
         date,
         time,
         packageType,
         place,
       };
-      setNewRequest(newRequest);
-
-      sendRequest(newRequest)
+      sendRequest(newRequest);
     }
   };
 
   const whatPage = () => {
     if (page === 0) {
       return (
-        <div>
-          <div>Выберите тип устрйоства: {deviceType}</div>{" "}
-          <TypeSelector setType={setDeviceType} options={["PC", "PS", "VR"]} />
+        <div className={styles.CreateType}>
+          <div className={styles.CreateTypeTitle}>Тип устройства</div>{" "}
+          <div className={styles.CreateTypeContent}>
+            <TypeSelector
+              setType={setDeviceType}
+              options={["PC", "PS", "VR"]}
+            />
+          </div>
         </div>
       );
     } else if (page === 1) {
       return (
-        <div>
-          <div>
+        <div className={styles.CreateDate}>
+          <div className={styles.CreateTypeTitle}>
             {/* сделать нормально дату */}
             Дата {date?.getFullYear()}
             <Calendar setDate={setDate} date={date} />
           </div>
-          <div>
-            <div>Время {time} </div>
+          <div >
+            <div className={styles.CreateTypeTitle}>Время {time} </div>
             <TimePicker setTime={setTime} />
           </div>
           <div>
-            <div>Пакет {packageType}</div>
+            <div className={styles.CreateTypeTitle}>Пакет {packageType}</div>
             <TypePackage setType={setpackageType} types={[1, 2, 3]} />
           </div>
         </div>
       );
     } else if (page === 2) {
       return (
-        <div>
+        <div className={styles.CreatePlace}>
           <div>Укажите место {place}</div>
           <div>
-
-            <PlaceTypeOne value={place} setValue={setPlace} options={[1,2,3,4,5,6,7,8,9,0]}/>
+            <PlaceTypeOne
+              value={place}
+              setValue={setPlace}
+              options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 0]}
+            />
           </div>
         </div>
       );
     } else if (page === 3) {
       return (
-        <div>
+        <div className={styles.CreateRequest}>
           <div>Ваша заявка</div>
           <div>
-            
             <CreateRequestCard
-              request={{ id : 1, date, time, packageType, deviceType, place }}
+              request={{ id: 1, date, time, packageType, deviceType, place }}
             />
           </div>
-          <div onClick={() => createRequeset(deviceType, date, time, packageType, place)}>
+          <div
+            onClick={() =>
+              createRequeset(deviceType, date, time, packageType, place)
+            }
+          >
             <Link to="/">
-              <CustomButton type={"White"} title="Подтвердить"  />
+              <CustomButton type={"White"} title="Подтвердить" />
             </Link>
           </div>
         </div>
@@ -127,20 +147,14 @@ export const Request: React.FC<Props> = () => {
     }
   };
 
-  const incrementPage = () => {
-    setPage(page + 1);
-  };
-
-  const decrementPage = () => {
-    setPage(page - 1);
-  };
-
   return (
     <div className={styles.Request}>
       <Header />
-      <Link to="/">
-        <button>Отмена</button>
-      </Link>
+      <div className={styles.ButtonClose}>
+        <Link to="/">
+          <CustomButton type={"Cancel"} title="Отмена" />
+        </Link>
+      </div>
       <div className={styles.Content}>
         <button onClick={decrementPage} disabled={buttonBackDisable}>
           <svg
@@ -152,11 +166,11 @@ export const Request: React.FC<Props> = () => {
           >
             <path
               d="M7.17188 16.875L17.6719 27.375L15 30L0 15L15 0L17.6719 2.625L7.17188 13.125H30V16.875H7.17188Z"
-              fill="#2e2e2e"
+              fill={leftArrowColor}
             />
           </svg>
         </button>
-        <div>{whatPage()}</div>
+        <div className={styles.ContentPage}>{whatPage()}</div>
         <button onClick={incrementPage} disabled={buttonForwardDisable}>
           <svg
             width="30"
@@ -167,7 +181,7 @@ export const Request: React.FC<Props> = () => {
           >
             <path
               d="M22.8281 13.125L12.3281 2.625L15 0L30 15L15 30L12.3281 27.375L22.8281 16.875L0 16.875L0 13.125L22.8281 13.125Z"
-              fill="#2e2e2e"
+              fill={rightArrowColor}
             />
           </svg>
         </button>

@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Authorization } from "../components/pages/authorization";
 import { Main } from "../components/pages/main";
 import { Request } from "../components/pages/create";
 
 import styles from "./index.module.scss";
-
+import { FEFUAuthorization } from "../components/pages/fefu_authorization";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -27,10 +26,9 @@ function App() {
   return (
     <div>
       <div className={styles.App}>
-        
         <Routes>
           <Route element={<Main/>} path="/"/>
-          <Route element={<Authorization setAuth={handleLogin}/>} path="/auth"/>
+          <Route element={<FEFUAuthorization setAuth={handleLogin}/>} path="/auth"/>
           <Route path="/create" element={<Request />} />
         </Routes>
       </div>

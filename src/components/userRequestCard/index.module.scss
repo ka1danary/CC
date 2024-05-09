@@ -2,22 +2,26 @@
     border: 1px solid #c7c7c7;
     padding: 30px;
     border-radius: 10px;
+    width: 70vw;
+    min-width: 500px;
     
 }
 .DeleteButton {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 .Content {
     font-size: 1.3em;
     color : #2e2e2e;
+    font-weight: 500;
     &Box {
         display: flex;
         align-items: center;
         &Title {
             margin-right: 15px;
-            color : #807e7e;
-            font-weight: 500;
+            color : #8f8f8f;
         }
     }
 }

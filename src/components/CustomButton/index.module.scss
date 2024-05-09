@@ -3,12 +3,15 @@
 }
 
 .Upload {
-    color: white;
-    background-color: #2e2e2e;
+    color: #05141B;
+    font-weight: 500;
+    background-color: #C4C8C7;
     padding: 20px;
     font-size: 1.3em;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: opacity 0.3s;
+    width: 70vw;
+    min-width: 500px;
 
     &:hover {
         opacity: 0.8;
@@ -16,7 +19,7 @@
 }
 
 .White {
-    color: #2e2e2e;
+    border: 1px #a7a7a7 solid;
     font-weight: 500;
     font-size: 1.3em;
     background-color: white;
@@ -25,6 +28,8 @@
     border-radius: 5px;
     transition: opacity 0.3s;
     height: 4vh;
+    width: 15vw;
+    min-width: 200px;
     
     &:hover {
         opacity: 0.8;
@@ -35,11 +40,21 @@
     background-color: #2e2e2e;
     color : white;
     padding: 5px;
-    width: 15vw;
+    width: 100vw;
     border-radius: 10px;
     transition: opacity 0.3s;
     
     &:hover {
         opacity: 0.8;
     }
+}
+
+.Cancel {
+    width: 17vw;
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
+    font-size: 1.3em;
+    background-color: #203240;
+    height: 4vh;;
 }

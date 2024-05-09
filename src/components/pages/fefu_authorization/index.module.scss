@@ -1,10 +1,25 @@
 .Authorization {
-    background-color: #2e2e2e;
+    background: linear-gradient(90deg, #06141B,#11232D,#253745, #4a5c6a, #9babab);
+    animation: gradient 10s ease infinite;
+    transform: translate3d(0, 0, 0);
+    background-size: 200% 200%;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;   
     color : white;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .Title {

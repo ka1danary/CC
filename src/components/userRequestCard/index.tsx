@@ -6,38 +6,34 @@ import styles from "./index.module.scss";
 import { IRequest } from "../../store/models/IRequest";
 
 interface Props {
-  request : IRequest | undefined;
-  isEmpty : (temp : boolean) => void
+  request: IRequest | undefined;
+  isEmpty: (temp: boolean) => void;
 }
 
-export const UserRequestCard: React.FC< Props> = ({request, isEmpty}) => {
- 
+export const UserRequestCard: React.FC<Props> = ({ request, isEmpty }) => {
   const [deleteRequest] = requestAPI.useDeleteRequestMutation();
 
   const handleRemove = (event: React.MouseEvent) => {
-    event.stopPropagation()
-    isEmpty(true)
-    console.log(request?.id)
-    deleteRequest(request)
-    console.log(request)
-  }
+    
+    event.stopPropagation();
+    isEmpty(true);
+    console.log(request?.id);
+    deleteRequest(request);
+    console.log(request);
+  };
 
   const convertDate = () => {
     const date = request?.date;
-    if( date != undefined) {
-      return (format(date, { date: "full", time: "short" }))
-      console.log(9)
+    if (date != undefined) {
+      return format(date, { date: "full", time: "short" });
+      console.log(9);
+    } else {
+      return "";
     }
-    else {
-      return ''
-    }
-  }
+  };
 
   return (
     <div className={styles.UserRequestCard}>
-      <div className={styles.DeleteButton} onClick={handleRemove}>
-        <CustomButton type={"Delete"} title="Удалить" />
-      </div>
       <div className={styles.Content}>
         <div className={styles.ContentBox}>
           <div className={styles.ContentBoxTitle}> Тип устройства: </div>
@@ -55,6 +51,9 @@ export const UserRequestCard: React.FC< Props> = ({request, isEmpty}) => {
           <div className={styles.ContentBoxTitle}> Место: </div>
           <div> {request?.place}</div>
         </div>
+      </div>
+      <div className={styles.DeleteButton} onClick={handleRemove}>
+        <CustomButton type={"Delete"} title="Отменить" />
       </div>
     </div>
   );

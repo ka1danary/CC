@@ -6,6 +6,7 @@ interface Props {
   value: string;
   type: string;
   width: string;
+  message: string;
 }
 
 export const CustomInput: React.FC<Props> = ({
@@ -14,8 +15,10 @@ export const CustomInput: React.FC<Props> = ({
   value,
   type,
   width,
+  message
+ 
 }) => {
-  
+
 
   return (
     <div className={styles.Content}>
@@ -27,7 +30,9 @@ export const CustomInput: React.FC<Props> = ({
         type={type}
         style={{ width: width }}
       />
-      
+      <div>
+          {message}
+      </div>
     </div>
   );
 };

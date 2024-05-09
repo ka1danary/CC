@@ -2,13 +2,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IRequest } from "../models/IRequest";
 import { IUser } from "../models/IUser";
 
-const BASE_URL = "http://localhost:3000";
+import { BASE_URL } from "../../API/roots/roots";
 
 export const requestAPI = createApi({
   reducerPath: "requestAPI",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   tagTypes: ["Request"],
   endpoints: (build) => ({
+
     fetchRequest: build.query<IRequest | undefined, IUser | undefined>({
       query: (user) => ({
         url: `/req/${user?.requestId}`,
@@ -33,7 +34,8 @@ export const requestAPI = createApi({
       }),
       invalidatesTags: ["Request"],
     }),
-  }),
+  })
+  
 });
 
 export const userApi = createApi({
@@ -41,6 +43,7 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   tagTypes: ["User"],
   endpoints: (build) => ({
+
     fetchUser: build.query<IUser, number>({
       query: (id) => ({
         url: `/users/${id}`,

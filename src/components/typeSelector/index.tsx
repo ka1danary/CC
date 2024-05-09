@@ -1,4 +1,5 @@
 import { deviceType } from "../../store/models/IModel";
+import { CustomButton } from "../CustomButton";
 import styles from "./index.module.scss";
 
 interface Props {
@@ -15,7 +16,7 @@ export const TypeSelector: React.FC<Props> = ({ options, setType }) => {
     <div className={styles.Container}>
       {options.map((el, index) => (
         <div key={index} onClick={() => handleSet(el)}>
-          {el}
+          <CustomButton title={el} type={"White"} />
         </div>
       ))}
     </div>

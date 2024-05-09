@@ -2,23 +2,39 @@
     font-family: Roboto;
     font-size: 1em;
     padding: 7px;
-    height: 3vh;
+    color: rgb(119, 119, 119);
+    height: 4vh;
     background-color: #111111;
     border: none;
-    border-radius: 8px;
-    color: white;
+    border-radius: 5px;
     cursor: pointer;
-    
-    &:hover {
-       
-    }
-    
-    &:active {
-        background-color: #e9e9e9;
-        color: #2e2e2e;
-    }
-    &:focus {
+    padding-left: 10px;
+    transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+
+    &:focus{
         background-color: #ffffff;
-        color: #2e2e2e;
     }
+    &:hover {
+        color: rgb(211, 211, 211);
+    }
+    &::placeholder {
+
+        &:hover {
+            color: #ffffff;
+        }
+
+        &:active {
+            color: #ffffff;
+        }
+
+        &:focus {
+            color: #ffffff;
+        }
+    }
+
+    &:focus {
+        color: #000000;
+    }
+
+
 }

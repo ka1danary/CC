@@ -1,0 +1,17 @@
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: 50px;
+        height: 50px;
+        
+        border-radius: 5px;
+        margin: 10px;
+        background-color: #0E1C27;
+        color : white;
+        font-size: 1.2em;
+    }
+
+}

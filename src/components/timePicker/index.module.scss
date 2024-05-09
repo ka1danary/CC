@@ -1,0 +1,23 @@
+.Container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 60vw;
+}
+
+.Column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+.TimePickerBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 5px;
+    width: 100px;
+    background-color: white;
+}
