@@ -9,16 +9,13 @@ import { deviceType, packageType } from "../../../store/models/IModel";
 import { TypePackage } from "../../typePackage";
 import { CreateRequestCard } from "../../createRequestCard";
 import { IRequest } from "../../../store/models/IRequest";
-import { requestAPI } from "../../../store/service/RequestService";
-
 import styles from "./index.module.scss";
-import { PlaceTypeOne } from "../../places/PC/placeTypeOne";
 import { PlaceSwitch } from "../../places/PC/placeSwitchTypes";
 
 interface Props {}
 
 export const Request: React.FC<Props> = () => {
-  const [sendRequest] = requestAPI.useCreateRequestMutation();
+  //const [sendRequest] = requestAPI.useCreateRequestMutation();
 
   const [page, setPage] = useState<number>(0);
   const [buttonBackDisable, setButtonBackDisable] = useState<boolean>(true);
@@ -28,11 +25,11 @@ export const Request: React.FC<Props> = () => {
   const [deviceType, setDeviceType] = useState<deviceType>();
   const [date, setDate] = useState<Date | undefined>();
   const [time, setTime] = useState<number | undefined>();
-  const [packageType, setpackageType] = useState<packageType | undefined>(2);
+  const [packageType, setpackageType] = useState<packageType | undefined>();
   const [place, setPlace] = useState<number | undefined>();
 
-  const [leftArrowColor, setLeftArrowColor] = useState<string>("black")
-  const [rightArrowColor, setRightArrowColor] = useState<string>("black")
+  const [leftArrowColor, setLeftArrowColor] = useState<string>("black");
+  const [rightArrowColor, setRightArrowColor] = useState<string>("black");
 
   const incrementPage = () => {
     setPage(page + 1);
@@ -45,23 +42,22 @@ export const Request: React.FC<Props> = () => {
   useEffect(() => {
     if (page != 0) {
       setButtonBackDisable(false);
-      setLeftArrowColor("black")
-     
+      setLeftArrowColor("black");
     } else {
       setButtonBackDisable(true);
-      setLeftArrowColor("gray")
+      setLeftArrowColor("gray");
     }
 
     if (page != 3) {
       setButtonForwardDisable(false);
-      setRightArrowColor("black")
+      setRightArrowColor("black");
     } else {
       setButtonForwardDisable(true);
-      setRightArrowColor("gray")
+      setRightArrowColor("gray");
     }
   }, [page]);
 
-  const createRequeset = (
+  const createRequest = (
     deviceType: deviceType,
     date: Date | undefined,
     time: number | undefined,
@@ -77,7 +73,9 @@ export const Request: React.FC<Props> = () => {
         packageType,
         place,
       };
-      sendRequest(newRequest);
+      //sendRequest(newRequest);
+      console.log(newRequest);
+      return newRequest;
     }
   };
 
@@ -99,10 +97,10 @@ export const Request: React.FC<Props> = () => {
         <div className={styles.CreateDate}>
           <div className={styles.CreateTypeTitle}>
             {/* сделать нормально дату */}
-            Дата {date?.getFullYear()}
+            Дата
             <Calendar setDate={setDate} date={date} />
           </div>
-          <div >
+          <div>
             <div className={styles.CreateTypeTitle}>Время {time} </div>
             <TimePicker setTime={setTime} />
           </div>
@@ -116,14 +114,14 @@ export const Request: React.FC<Props> = () => {
       return (
         <div className={styles.CreatePlace}>
           <div>
-            <PlaceSwitch setValue={setPlace} value={place}/>
+            <PlaceSwitch setValue={setPlace} value={place} />
           </div>
         </div>
       );
     } else if (page === 3) {
       return (
         <div className={styles.CreateRequest}>
-          <div>Ваша заявка</div>
+          <div className={styles.CreateTypeTitle}>Ваша заявка</div>
           <div>
             <CreateRequestCard
               request={{ id: 1, date, time, packageType, deviceType, place }}
@@ -131,12 +129,14 @@ export const Request: React.FC<Props> = () => {
           </div>
           <div
             onClick={() =>
-              createRequeset(deviceType, date, time, packageType, place)
+              createRequest(deviceType, date, time, packageType, place)
             }
           >
-            <Link to="/">
-              <CustomButton type={"White"} title="Подтвердить" />
-            </Link>
+            <div className={styles.ButonConfirm}>
+              <Link to="/">
+                <CustomButton type={"White"} title="Подтвердить" />
+              </Link>
+            </div>
           </div>
         </div>
       );

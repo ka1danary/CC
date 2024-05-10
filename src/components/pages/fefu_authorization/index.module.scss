@@ -1,25 +1,27 @@
 .Authorization {
-    background: linear-gradient(90deg, #06141B,#11232D,#253745, #4a5c6a, #9babab);
+    background: linear-gradient(90deg, #06141B, #11232D, #253745, #4a5c6a, #9babab);
     animation: gradient 10s ease infinite;
     transform: translate3d(0, 0, 0);
     background-size: 200% 200%;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;   
-    color : white;
+    height: 100vh;
+    color: white;
 }
 
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .Title {
@@ -29,11 +31,12 @@
     font-size: 1.5em;
     font-weight: 500;
     transition: opacity 0.3s;
-    
+
     width: 300px;
-    background-color:#0D1D2A ;
+    background-color: #0D1D2A;
     padding: 20px;
     border-radius: 10px;
+
     &:hover {
         opacity: 0.7;
     }
@@ -41,12 +44,10 @@
 
 .Input {
     margin-top: 30px;
+
     &Title {
         margin-bottom: 15px;
     }
-    &Container {
-       
-    } 
 }
 
 .ContentPost {

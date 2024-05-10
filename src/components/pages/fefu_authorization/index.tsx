@@ -1,14 +1,19 @@
+import { useEffect } from "react";
 import styles from "./index.module.scss";
 
 interface Props {
-  setAuth: () => void;
+  setAuth: (val : boolean) => void;
 }
 
 export const FEFUAuthorization: React.FC<Props> = ({ setAuth }) => {
 
   const helper = () => {
-    setAuth()
+    setAuth(true)
   }
+
+  useEffect(() => {
+    setAuth(false)
+  }, [])
 
   return (
     <div className={styles.Authorization}>

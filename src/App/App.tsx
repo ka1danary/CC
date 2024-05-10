@@ -9,26 +9,28 @@ import { FEFUAuthorization } from "../components/pages/fefu_authorization";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
+  const handleLogin = (val: boolean) => {
+    setIsLoggedIn(val);
   };
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn) {
-      return navigate("/")
+      return navigate("/");
+    } else {
+      return navigate("/auth");
     }
-    else {
-      return navigate("/auth")
-    }
-  }, [isLoggedIn])
+  }, [isLoggedIn]);
 
   return (
     <div>
       <div className={styles.App}>
         <Routes>
-          <Route element={<Main/>} path="/"/>
-          <Route element={<FEFUAuthorization setAuth={handleLogin}/>} path="/auth"/>
+          <Route element={<Main />} path="/" />
+          <Route
+            element={<FEFUAuthorization setAuth={handleLogin} />}
+            path="/auth"
+          />
           <Route path="/create" element={<Request />} />
         </Routes>
       </div>
