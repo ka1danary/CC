@@ -39,8 +39,9 @@
 .Delete {
     background-color: #2e2e2e;
     color : white;
-    padding: 5px;
+    
     width: 100vw;
+    padding:20px;
     border-radius: 10px;
     transition: opacity 0.3s;
     
@@ -51,10 +52,11 @@
 
 .Cancel {
     width: 17vw;
-    color: white;
+    color: rgb(53, 53, 53);
     font-weight: 500;
     border-radius: 10px;
+    border: 1px solid gray;
     font-size: 1.3em;
-    background-color: #203240;
+    background-color: #ffffff;
     height: 4vh;;
 }
