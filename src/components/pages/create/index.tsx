@@ -12,7 +12,8 @@ import { IRequest } from "../../../store/models/IRequest";
 import { requestAPI } from "../../../store/service/RequestService";
 
 import styles from "./index.module.scss";
-import { PlaceTypeOne } from "../../placeTypeOne";
+import { PlaceTypeOne } from "../../places/PC/placeTypeOne";
+import { PlaceSwitch } from "../../places/PC/placeSwitchTypes";
 
 interface Props {}
 
@@ -114,13 +115,8 @@ export const Request: React.FC<Props> = () => {
     } else if (page === 2) {
       return (
         <div className={styles.CreatePlace}>
-          <div>Укажите место {place}</div>
           <div>
-            <PlaceTypeOne
-              value={place}
-              setValue={setPlace}
-              options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 0]}
-            />
+            <PlaceSwitch setValue={setPlace} value={place}/>
           </div>
         </div>
       );
