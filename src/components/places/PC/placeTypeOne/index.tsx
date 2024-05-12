@@ -1,8 +1,7 @@
 import styles from "./index.module.scss";
 
 interface Props {
-  
-  value: number | undefined;
+  value: number | null;
   setValue: (value: number) => void;
 }
 

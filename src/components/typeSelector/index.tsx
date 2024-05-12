@@ -1,15 +1,17 @@
-import { deviceType } from "../../store/models/IModel";
+import { device_type } from "../../store/models/dbModels/models";
 import { CustomButton } from "../CustomButton";
+
 import styles from "./index.module.scss";
 
 interface Props {
-  options: deviceType[];
-  setType: (type: deviceType) => void;
+  options: device_type[];
+  setType: (type: device_type | null) => void;
 }
 
 export const TypeSelector: React.FC<Props> = ({ options, setType }) => {
-  const handleSet = (el: deviceType) => {
-    setType(el);
+  const handleSet = (type: device_type) => {
+    const typeValue = type ?? "PC";
+    setType(typeValue);
   };
 
   return (

@@ -1,35 +1,47 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import styles from "./index.module.scss";
+
 import { Calendar } from "../../calendar";
 import { TimePicker } from "../../timePicker";
 import { Header } from "../../header";
 import { CustomButton } from "../../CustomButton";
 import { TypeSelector } from "../../typeSelector";
-import { deviceType, packageType } from "../../../store/models/IModel";
 import { TypePackage } from "../../typePackage";
 import { CreateRequestCard } from "../../createRequestCard";
-import { IRequest } from "../../../store/models/IRequest";
-import styles from "./index.module.scss";
 import { PlaceSwitch } from "../../places/PC/placeSwitchTypes";
+import {
+  device_type,
+  package_type,
+} from "../../../store/models/dbModels/models";
+import { buildRequestObject } from "./helperCreate";
 
 interface Props {}
 
 export const Request: React.FC<Props> = () => {
   //const [sendRequest] = requestAPI.useCreateRequestMutation();
 
+  //-------------------------------------------------------
   const [page, setPage] = useState<number>(0);
   const [buttonBackDisable, setButtonBackDisable] = useState<boolean>(true);
   const [buttonForwardDisable, setButtonForwardDisable] =
     useState<boolean>(false);
+  //-------------------------------------------------------
 
-  const [deviceType, setDeviceType] = useState<deviceType>();
-  const [date, setDate] = useState<Date | undefined>();
-  const [time, setTime] = useState<number | undefined>();
-  const [packageType, setpackageType] = useState<packageType | undefined>();
-  const [place, setPlace] = useState<number | undefined>();
+  //-------------------------------------------------------
+  const [deviceType, setDeviceType] = useState<device_type | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [startTime, setStartTime] = useState<number | -1>(-1);
+  const [packageType, setPackageType] = useState<package_type | null>(null);
+  const [place, setPlace] = useState<number | null>(null);
 
+  //-------------------------------------------------------
+
+  //-------------------------------------------------------
   const [leftArrowColor, setLeftArrowColor] = useState<string>("black");
   const [rightArrowColor, setRightArrowColor] = useState<string>("black");
+  //-------------------------------------------------------
 
   const incrementPage = () => {
     setPage(page + 1);
@@ -57,27 +69,7 @@ export const Request: React.FC<Props> = () => {
     }
   }, [page]);
 
-  const createRequest = (
-    deviceType: deviceType,
-    date: Date | undefined,
-    time: number | undefined,
-    packageType: packageType,
-    place: number | undefined
-  ) => {
-    if ((deviceType && date && time && packageType && place) != undefined) {
-      const newRequest: IRequest = {
-        id: 1,
-        deviceType,
-        date,
-        time,
-        packageType,
-        place,
-      };
-      //sendRequest(newRequest);
-      console.log(newRequest);
-      return newRequest;
-    }
-  };
+  //-------------------------------------------------------
 
   const whatPage = () => {
     if (page === 0) {
@@ -98,15 +90,15 @@ export const Request: React.FC<Props> = () => {
           <div className={styles.CreateTypeTitle}>
             {/* сделать нормально дату */}
             Дата
-            <Calendar setDate={setDate} date={date} />
+            <Calendar setDate={setStartDate} date={startDate} />
           </div>
           <div>
-            <div className={styles.CreateTypeTitle}>Время {time} </div>
-            <TimePicker setTime={setTime} />
+            <div className={styles.CreateTypeTitle}>Время {startTime} </div>
+            <TimePicker setTime={setStartTime} />
           </div>
           <div>
             <div className={styles.CreateTypeTitle}>Пакет {packageType}</div>
-            <TypePackage setType={setpackageType} types={[1, 2, 3]} />
+            <TypePackage setType={setPackageType} types={[1, 2, 3]} />
           </div>
         </div>
       );
@@ -119,19 +111,21 @@ export const Request: React.FC<Props> = () => {
         </div>
       );
     } else if (page === 3) {
+      const buildedRequest = buildRequestObject(
+        1,
+        deviceType,
+        startDate,
+        startTime,
+        packageType,
+        place
+      );
       return (
         <div className={styles.CreateRequest}>
           <div className={styles.CreateTypeTitle}>Ваша заявка</div>
           <div>
-            <CreateRequestCard
-              request={{ id: 1, date, time, packageType, deviceType, place }}
-            />
+            <CreateRequestCard request={buildedRequest} />
           </div>
-          <div
-            onClick={() =>
-              createRequest(deviceType, date, time, packageType, place)
-            }
-          >
+          <div>
             <div className={styles.ButonConfirm}>
               <Link to="/">
                 <CustomButton type={"White"} title="Подтвердить" />

@@ -1,15 +1,16 @@
-import { packageType } from '../../store/models/IModel';
+import { package_type } from '../../store/models/dbModels/models';
 import style from './index.module.scss'
 
 interface Props {
-    setType : (type : packageType) => void;
-    types: packageType[];
+    setType : (type : package_type) => void;
+    types: package_type[];
 }
 
 export const TypePackage: React.FC<Props> = ({setType, types} ) => {
 
-    const handleSet = (el : number) => {
-        setType(el)
+    const handleSet = (type : package_type) => {
+        const typeValue = type ?? 1
+        setType(typeValue)
     }
 
     return (
