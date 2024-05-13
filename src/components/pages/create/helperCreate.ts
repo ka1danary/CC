@@ -41,6 +41,7 @@ export const buildRequestObject = (
       end_date_and_time: end_full_date,
       id_workstation: place,
     };
+    console.log(request)
     return request;
   }
   else {

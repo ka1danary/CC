@@ -111,6 +111,7 @@ export const Request: React.FC<Props> = () => {
         </div>
       );
     } else if (page === 3) {
+      
       const buildedRequest = buildRequestObject(
         1,
         deviceType,
@@ -118,7 +119,9 @@ export const Request: React.FC<Props> = () => {
         startTime,
         packageType,
         place
-      );
+      )
+
+  
       return (
         <div className={styles.CreateRequest}>
           <div className={styles.CreateTypeTitle}>Ваша заявка</div>

@@ -23,9 +23,7 @@ export const PlaceSwitch: React.FC<Props> = (props) => {
     if (page === 0) {
       return (
         <div>
-          {props.value ?? (
           <PlaceTypeOne setValue={props.setValue} value={props.value} />
-          )} 
         </div>
       );
     } else if (page === 1) {

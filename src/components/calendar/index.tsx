@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   date: Date | null;
-  setDate: (date: Date) => void;
+  setDate: (date: Date | null) => void;
 }
 
 export const Calendar: React.FC<Props> = ({ date, setDate }) => {
@@ -12,12 +12,11 @@ export const Calendar: React.FC<Props> = ({ date, setDate }) => {
   };
 
   // Преобразуем объект Date обратно в строку для использования в атрибуте value input
-  const formattedDate =
-    typeof date === "string" ? date : date?.toISOString().split("T")[0];
+  const formatedDate = date instanceof Date ? date.toISOString().split("T")[0] : '';
 
   return (
     <div>
-      <input type="date" value={formattedDate} onChange={handleDateChange} />
+      <input type="date" value={formatedDate} onChange={handleDateChange} />
     </div>
   );
 };
