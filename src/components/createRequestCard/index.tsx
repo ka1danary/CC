@@ -14,7 +14,7 @@ export const CreateRequestCard: React.FC<Props> = ({ request }) => {
   ) => {
     const checkDate = date ? date : new Date();
     const fullDate = format(checkDate, "full");
-    const parseTimeFromDate = format(checkDate, "hh:mm", locale)
+    const parseTimeFromDate = format(checkDate, "hh:mm", locale);
     return {
       fullDate,
       parseTimeFromDate,
@@ -41,8 +41,7 @@ export const CreateRequestCard: React.FC<Props> = ({ request }) => {
         <div className={styles.Article}>
           <div className={styles.Title}>До</div>
           <div className={styles.TitleContent}>
-          {createReadbleDate(request?.end_date_and_time).parseTimeFromDate}
-
+            {createReadbleDate(request?.end_date_and_time).parseTimeFromDate}{" "}
           </div>
         </div>
         <div className={styles.Article}>

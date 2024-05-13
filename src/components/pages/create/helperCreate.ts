@@ -9,8 +9,9 @@ export const createRequest = (req: USER_REQUEST) => {
 };
 
 const convertDateFromNumberToDate = (hours: number, date: Date) => {
-  date.setHours(hours, 0, 0, 0);
-  return date;
+  const newDate = date;
+  newDate.setHours(hours, 0, 0, 0);
+  return newDate;
 };
 
 export const buildRequestObject = (
@@ -29,9 +30,10 @@ export const buildRequestObject = (
     place != null
   ) {
     const start_full_date = convertDateFromNumberToDate(start_time, start_date);
+    const end_time = start_time + package_type;
     const end_full_date = convertDateFromNumberToDate(
-      start_time + package_type,
-      start_full_date
+      end_time,
+      new Date(start_full_date)
     );
     const request: USER_REQUEST = {
       id_user_request: user_id,
@@ -41,10 +43,9 @@ export const buildRequestObject = (
       end_date_and_time: end_full_date,
       id_workstation: place,
     };
-    console.log(request)
+    console.log(request);
     return request;
-  }
-  else {
-    return null
+  } else {
+    return null;
   }
 };

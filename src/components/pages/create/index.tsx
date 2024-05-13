@@ -39,7 +39,7 @@ export const Request: React.FC<Props> = () => {
   //-------------------------------------------------------
 
   //-------------------------------------------------------
-  const [leftArrowColor, setLeftArrowColor] = useState<string>("black");
+  const [leftArrowColor, setLeftArrowColor] = useState<string>("#F4F4F4");
   const [rightArrowColor, setRightArrowColor] = useState<string>("black");
   //-------------------------------------------------------
 
@@ -57,7 +57,7 @@ export const Request: React.FC<Props> = () => {
       setLeftArrowColor("black");
     } else {
       setButtonBackDisable(true);
-      setLeftArrowColor("gray");
+      setLeftArrowColor("#F4F4F4");
     }
 
     if (page != 3) {
@@ -65,7 +65,7 @@ export const Request: React.FC<Props> = () => {
       setRightArrowColor("black");
     } else {
       setButtonForwardDisable(true);
-      setRightArrowColor("gray");
+      setRightArrowColor("#F4F4F4");
     }
   }, [page]);
 
@@ -121,7 +121,6 @@ export const Request: React.FC<Props> = () => {
         place
       )
 
-  
       return (
         <div className={styles.CreateRequest}>
           <div className={styles.CreateTypeTitle}>Ваша заявка</div>
