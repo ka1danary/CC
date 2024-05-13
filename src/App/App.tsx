@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Main } from "../components/pages/main";
 import { Request } from "../components/pages/create";
-import { format } from "@formkit/tempo"
 
 import styles from "./index.module.scss";
 import { FEFUAuthorization } from "../components/pages/fefu_authorization";
@@ -23,11 +22,7 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    const t = new Date()
-    const l = 'default'
-    console.log(format(t, "hh:mm", l))
-  }, [])
+
 
   return (
     <div>
