@@ -55,7 +55,7 @@ export interface WS_STATUS {
 export interface USER_REQUEST {
     id_user_request : number,
     id_user : number,
-    device_type : device_type,
+    device_type : device_type, 
     start_date_and_time : Date,
     end_date_and_time : Date,
     id_workstation : number

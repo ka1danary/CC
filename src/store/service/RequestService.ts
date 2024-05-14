@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IRequest } from "../models/IRequest";
 import { IUser } from "../models/IUser";
 
-import { BASE_URL } from "../../API/roots/roots";
+import { BASE_URL, user_request } from "../../API/roots/roots";
+import { USER_REQUEST } from "../models/dbModels/models";
 
 export const requestAPI = createApi({
   reducerPath: "requestAPI",
@@ -10,25 +11,25 @@ export const requestAPI = createApi({
   tagTypes: ["Request"],
   endpoints: (build) => ({
 
-    fetchRequest: build.query<IRequest | undefined, IUser | undefined>({
-      query: (user) => ({
-        url: `/req/${user?.requestId}`,
+    fetchRequest: build.query<USER_REQUEST | undefined, number | undefined>({
+      query: (id) => ({
+        url: `${user_request}/${id}`,
       }),
       providesTags: () => ["Request"],
     }),
 
-    createRequest: build.mutation<IRequest | undefined, IRequest | undefined>({
+    createRequest: build.mutation<USER_REQUEST | undefined, IRequest | undefined>({
       query: (req) => ({
-        url: `/req`,
+        url: `${user_request}/${req?.id}`,
         method: "POST",
         body: req,
       }),
       invalidatesTags: ["Request"],
     }),
 
-    deleteRequest: build.mutation<IRequest | undefined, IRequest | undefined>({
+    deleteRequest: build.mutation<USER_REQUEST | undefined, IRequest | undefined>({
       query: (req) => ({
-        url: `/req/${req?.id}`,
+        url:  `${user_request}/${req?.id}`,
         method: "DELETE",
         body: req,
       }),
