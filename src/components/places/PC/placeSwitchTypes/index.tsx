@@ -2,10 +2,12 @@ import React from "react";
 import { PlaceTypeOne } from "../placeTypeOne";
 import { PlaceTypeTwo } from "../placeTypeTwo";
 import styles from "./index.module.scss";
+import { device_type } from "../../../../store/models/dbModels/models";
 
 interface Props {
   setValue: (place: number) => void;
   value: number | null;
+  type: device_type | null;
 }
 
 export const PlaceSwitch: React.FC<Props> = (props) => {
@@ -20,18 +22,24 @@ export const PlaceSwitch: React.FC<Props> = (props) => {
     React.useState<string>("#05141B");
 
   const switchPlacePagination = () => {
-    if (page === 0) {
-      return (
-        <div>
-          <PlaceTypeOne setValue={props.setValue} value={props.value} />
-        </div>
-      );
-    } else if (page === 1) {
-      return (
-        <div>
-          <PlaceTypeTwo />
-        </div>
-      );
+    if (props.type === "PC") {
+      if (page === 0) {
+        return (
+          <div>
+            <PlaceTypeOne setValue={props.setValue} value={props.value} />
+          </div>
+        );
+      } else if (page === 1) {
+        return (
+          <div>
+            <PlaceTypeTwo />
+          </div>
+        );
+      }
+    } else if (props.type === "VR") {
+      return <div>VR</div>;
+    } else if (props.type === "PS") {
+      return <div>PS</div>;
     }
   };
 

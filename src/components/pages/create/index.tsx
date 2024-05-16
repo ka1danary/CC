@@ -112,7 +112,7 @@ export const Request: React.FC<Props> = () => {
       return (
         <div className={styles.CreatePlace}>
           <div>
-            <PlaceSwitch setValue={setPlace} value={place} />
+            <PlaceSwitch setValue={setPlace} value={place} type={deviceType}/>
           </div>
         </div>
       );
