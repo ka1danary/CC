@@ -16,6 +16,7 @@ import {
   package_type,
 } from "../../../store/models/dbModels/models";
 import { buildRequestObject } from "./helperCreate";
+import { format } from "@formkit/tempo";
 
 interface Props {}
 
@@ -81,6 +82,7 @@ export const Request: React.FC<Props> = () => {
               setType={setDeviceType}
               options={["PC", "PS", "VR"]}
             />
+            <div className={styles.typeSelected}>{deviceType}</div>
           </div>
         </div>
       );
@@ -91,14 +93,18 @@ export const Request: React.FC<Props> = () => {
             {/* сделать нормально дату */}
             Дата
             <Calendar setDate={setStartDate} date={startDate} />
+            
+            <div className={styles.dateSelected}>{format((startDate != null ? startDate : new Date()), "full")}</div>
           </div>
           <div>
-            <div className={styles.CreateTypeTitle}>Время {startTime} </div>
+            <div className={styles.CreateTypeTitle}>Время </div>
             <TimePicker setTime={setStartTime} />
+            <div className={styles.dateSelected}>{startTime}</div>
           </div>
           <div>
-            <div className={styles.CreateTypeTitle}>Пакет {packageType}</div>
+            <div className={styles.CreateTypeTitle}>Пакет</div>
             <TypePackage setType={setPackageType} types={[1, 2, 3]} />
+            <div className={styles.dateSelected}>{packageType}</div>
           </div>
         </div>
       );
@@ -111,7 +117,6 @@ export const Request: React.FC<Props> = () => {
         </div>
       );
     } else if (page === 3) {
-      
       const buildedRequest = buildRequestObject(
         1,
         deviceType,
@@ -119,7 +124,7 @@ export const Request: React.FC<Props> = () => {
         startTime,
         packageType,
         place
-      )
+      );
 
       return (
         <div className={styles.CreateRequest}>
