@@ -3,12 +3,13 @@ import { USER_REQUEST } from "../models/dbModels/models";
 import { requestAPI } from "../service/RequestService";
 
 interface RequestsState {
-  requests: USER_REQUEST | undefined;
+  request: USER_REQUEST | undefined;
   error: string;
+  requests: USER_REQUEST[] | undefined;
 }
 
 const initialState: RequestsState = {
-  requests: {
+  request: {
     id_user_request: 1,
     id_user: 1,
     device_type: "PC",
@@ -17,16 +18,19 @@ const initialState: RequestsState = {
     id_workstation: 1,
   },
   error: "",
+  requests: [],
 };
 
 export const requestSlice = createSlice({
   name: "requests",
   initialState,
   reducers: {
-    getRequest(state, action: PayloadAction<USER_REQUEST>) {
+    getRequest(state, action: PayloadAction<USER_REQUEST[]>) {
       const { data: req } = requestAPI.useFetchRequestQuery(
-        state.requests?.id_user
+        state.request?.id_user
       );
+      state.request = req;
+      state.requests = action.payload;
     },
   },
 });
