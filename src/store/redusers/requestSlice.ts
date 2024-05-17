@@ -7,14 +7,6 @@ interface RequestsState {
   error: string;
   requests: USER_REQUEST[] | undefined;
 }
-// export interface USER_REQUEST {
-//   id_user_request : number,
-//   id_user : number,
-//   device_type : device_type,
-//   start_date_and_time : Date,
-//   end_date_and_time : Date,
-//   id_workstation : number
-// }
 
 const initialState: RequestsState = {
   request: {
@@ -40,16 +32,34 @@ export const requestSlice = createSlice({
       state.request = req;
       state.requests = action.payload;
     },
-    setDeviceType(state, action: PayloadAction<device_type>) {
-      state.request ? (state.request.device_type = action.payload) : state.error = 'error device_type';
+    setDeviceTypeReduser(state, action: PayloadAction<device_type | null>) {
+      if (state.request) {
+        state.request.device_type = action.payload || "PC";
+      } else {
+        state.error = "Error setting device type";
+      }
     },
-    setStartDate(state, action: PayloadAction<Date>) {
-      state.request ? state.request.start_date_and_time = action.payload : 'error start_date'
+    setStartDateAndTimeReduser(state, action: PayloadAction<Date>) {
+      if (state.request) {
+        state.request.start_date_and_time = action.payload;
+      } else {
+        state.error = "Error setting start date";
+      }
     },
-    setStartTime(state, action: PayloadAction<Date>) {
-      state.request ? state.request.start_date_and_time = action.payload : 'error start_date'
+    setEndDateAndTimeReduser(state, action: PayloadAction<Date>) {
+      if (state.request) {
+        state.request.start_date_and_time = action.payload;
+      } else {
+        state.error = "Error setting start time";
+      }
     },
   },
 });
 
-export default requestSlice.reducer
+export const {
+  setDeviceTypeReduser,
+  setStartDateAndTimeReduser,
+  setEndDateAndTimeReduser,
+} = requestSlice.actions;
+export default requestSlice.actions;
+
