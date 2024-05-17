@@ -5,6 +5,8 @@ import { Request } from "../components/pages/create";
 
 import styles from "./index.module.scss";
 import { FEFUAuthorization } from "../components/pages/fefu_authorization";
+//import { useDispatch } from "react-redux";
+//import { useAppSelector } from "../store/hooks/redux";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -22,12 +24,15 @@ function App() {
     }
   }, [isLoggedIn]);
 
-
+  //const dispatch = useDispatch()
+  //const {request} = useAppSelector(state => state.requestReduser)
 
   return (
     <div>
       <div className={styles.App}>
-
+        <div>
+        
+        </div>
         <Routes>
           <Route element={<Main />} path="/" />
           <Route

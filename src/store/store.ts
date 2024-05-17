@@ -1,9 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 //import { userReduser } from "./redusers/userReduser"
 import { requestAPI, userApi } from "./service/RequestService"
+import requestReduser from './redusers/requestSlice'
 
 const rootReduser = combineReducers({
-    //userReduser,
+    requestReduser,
     // rtc query
     [requestAPI.reducerPath]: requestAPI.reducer,
     [userApi.reducerPath]: userApi.reducer

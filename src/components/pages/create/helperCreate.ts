@@ -1,8 +1,12 @@
+import { useDispatch } from "react-redux";
+import React from "react";
 import {
   device_type,
   package_type,
   USER_REQUEST,
 } from "../../../store/models/dbModels/models";
+
+
 
 export const createRequest = (req: USER_REQUEST) => {
   return req ? req : "error";
@@ -49,3 +53,24 @@ export const buildRequestObject = (
     return null;
   }
 };
+
+
+export const useSetFieldInRequest = () => {
+
+  const dispatch = useDispatch()
+
+  const [deviceType, setDeviceType] = React.useState<device_type | null>(null);
+
+  const setDeviceTypeHelper = (type : device_type) => {
+      setDeviceType(type);
+  }
+
+  const setStartDateHelper = (date : Date) => {
+
+  }
+
+  const setStartTimeHelper = (time : number) => {
+    
+  }
+  return { deviceType, setDeviceType, setDeviceTypeHelper };
+}

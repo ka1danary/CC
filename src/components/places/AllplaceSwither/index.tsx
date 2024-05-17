@@ -1,5 +1,4 @@
 import { device_type } from "../../../store/models/dbModels/models";
-import { PlaceSwitch } from "../PC/placeSwitchTypes";
 
 interface Props {
     type : device_type
@@ -11,14 +10,14 @@ export const AllPlacesSwitcher: React.FC<Props> = (props) => {
         if(type === "PC") {
             return (
                 <div>
-                    <PlaceSwitch />
+                    PC
                 </div>
             )
         }
         else if(type === "PS") {
             return (
                 <div>
-
+                    PS
                 </div>
             )
         }
@@ -26,7 +25,7 @@ export const AllPlacesSwitcher: React.FC<Props> = (props) => {
         else if(type === "VR") {
             return (
                 <div>
-
+                    VR
                 </div>
             )
         }
@@ -34,7 +33,7 @@ export const AllPlacesSwitcher: React.FC<Props> = (props) => {
 
     return (
         <div>
-            
+            {helperSwither(props.type)}
         </div>
     )
 };
