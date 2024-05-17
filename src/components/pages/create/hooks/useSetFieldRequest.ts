@@ -1,46 +1,48 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks/redux";
-import { device_type } from "../../../../store/models/dbModels/models";
+
+import { useAppDispatch } from "../../../../store/hooks/redux";
+import {
+  device_type
+} from "../../../../store/models/dbModels/models";
 import {
   setDeviceTypeReduser,
   setStartDateAndTimeReduser,
-  setEndDateAndTimeReduser
+  setEndDateAndTimeReduser,
+  setPlaceReduser,
 } from "../../../../store/redusers/requestSlice";
+import { convertDateFromNumberToDate } from "../helperCreate";
 
 export const useSetFieldInRequest = () => {
   const dispatch = useAppDispatch();
 
-  const [deviceType, setDeviceTypeState] = React.useState<device_type | null>(
-    null
-  );
-  const [startDate, setStartDateState] = React.useState<Date | null>(null);
-  const [startTime, setStartTimeState] = React.useState<Date | null>(null);
-
   //const { request } = useAppSelector((state) => state);
 
+  // set Device type
   const setDeviceTypeHelper = (type: device_type | null) => {
-    setDeviceTypeState(type);
     dispatch(setDeviceTypeReduser(type));
   };
 
-  const setStartDateHelper = (endDateAndTime: Date) => {
-    setStartDateState(endDateAndTime);
-    dispatch(setStartDateAndTimeReduser(endDateAndTime));
+  // set Session Start Time
+  const setStartDateAndTimeHelper = (startDateAndTime: Date, time: number) => {
+    const date = convertDateFromNumberToDate(time, startDateAndTime);
+    dispatch(setStartDateAndTimeReduser(date));
   };
 
-  const setStartTimeHelper = (endDateAndTime: Date) => {
-    setStartTimeState(endDateAndTime);
-    dispatch(setEndDateAndTimeReduser(endDateAndTime));
+  // set Session End Time
+  const setEndDateANdTimeHelper = (endDateAndTime: Date, time: number, nextTime : number) => {
+    const date = convertDateFromNumberToDate(time + nextTime, endDateAndTime);
+    dispatch(setEndDateAndTimeReduser(date));
+  };
+
+  // set Place index
+  const setPlaceHelper = (place: number) => {
+    dispatch(setPlaceReduser(place));
   };
 
   return {
-    data: {
-      deviceType,
-      startDate,
-      startTime,
-    },
+    data: {},
     setDeviceTypeHelper,
-    setStartDateHelper,
-    setStartTimeHelper,
+    setStartDateAndTimeHelper,
+    setEndDateANdTimeHelper,
+    setPlaceHelper,
   };
 };

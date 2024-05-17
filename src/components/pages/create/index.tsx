@@ -11,17 +11,20 @@ import { TypeSelector } from "../../typeSelector";
 import { TypePackage } from "../../typePackage";
 import { CreateRequestCard } from "../../createRequestCard";
 import { PlaceSwitch } from "../../places/PC/placeSwitchTypes";
-import {
-  device_type,
-  package_type,
-} from "../../../store/models/dbModels/models";
 import { buildRequestObject } from "./helperCreate";
 import { format } from "@formkit/tempo";
+
+import { useSetFieldInRequest } from "./hooks/useSetFieldRequest";
+import { setDeviceTypeReduser } from "../../../store/redusers/requestSlice";
 
 interface Props {}
 
 export const Request: React.FC<Props> = () => {
   //const [sendRequest] = requestAPI.useCreateRequestMutation();
+
+  const {
+    data : {deviceType, startDate, startTime,}
+  } = useSetFieldInRequest()
 
   //-------------------------------------------------------
   const [page, setPage] = useState<number>(0);
@@ -31,11 +34,11 @@ export const Request: React.FC<Props> = () => {
   //-------------------------------------------------------
 
   //-------------------------------------------------------
-  const [deviceType, setDeviceType] = useState<device_type | null>(null);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [startTime, setStartTime] = useState<number | -1>(-1);
-  const [packageType, setPackageType] = useState<package_type | null>(null);
-  const [place, setPlace] = useState<number | null>(null);
+  // const [deviceType, setDeviceType] = useState<device_type | null>(null);
+  // const [startDate, setStartDate] = useState<Date | null>(null);
+  // const [startTime, setStartTime] = useState<number | -1>(-1);
+  // const [packageType, setPackageType] = useState<package_type | null>(null);
+  // const [place, setPlace] = useState<number | null>(null);
 
   //-------------------------------------------------------
 
@@ -79,7 +82,7 @@ export const Request: React.FC<Props> = () => {
           <div className={styles.CreateTypeTitle}>Тип устройства</div>{" "}
           <div className={styles.CreateTypeContent}>
             <TypeSelector
-              setType={setDeviceType}
+              setType={setDeviceTypeReduser}
               options={["PC", "PS", "VR"]}
             />
             <div className={styles.typeSelected}>{deviceType}</div>

@@ -1,22 +1,21 @@
-import { useDispatch } from "react-redux";
-import React from "react";
 import {
   device_type,
   package_type,
   USER_REQUEST,
 } from "../../../store/models/dbModels/models";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks/redux";
 
 export const createRequest = (req: USER_REQUEST) => {
   return req ? req : "error";
 };
 
-const convertDateFromNumberToDate = (hours: number, date: Date) => {
+// Возврашает выбранную дату + выбранное в отдельном компоненте время 
+export const convertDateFromNumberToDate = (hours: number, date: Date) => {
   const newDate = date;
   newDate.setHours(hours, 0, 0, 0);
   return newDate;
 };
 
+// возвращает полный объект типа USER_REQUEST
 export const buildRequestObject = (
   user_id: number,
   device_type: device_type | null,

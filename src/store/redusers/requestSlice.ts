@@ -50,7 +50,15 @@ export const requestSlice = createSlice({
       if (state.request) {
         state.request.start_date_and_time = action.payload;
       } else {
-        state.error = "Error setting start time";
+        state.error = "Error setting end date";
+      }
+    },
+    setPlaceReduser(state, action: PayloadAction<number>) {
+      if(state.request) {
+        state.request.id_workstation = action.payload
+      }
+      else {
+        state.error = "Error setting Place";
       }
     },
   },
@@ -60,6 +68,6 @@ export const {
   setDeviceTypeReduser,
   setStartDateAndTimeReduser,
   setEndDateAndTimeReduser,
+  setPlaceReduser
 } = requestSlice.actions;
 export default requestSlice.actions;
-
