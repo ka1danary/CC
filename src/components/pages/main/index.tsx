@@ -5,33 +5,29 @@ import { UserRequestCard } from "../../userRequestCard";
 import { CustomButton } from "../../CustomButton";
 import { Link } from "react-router-dom";
 import { IRequest } from "../../../store/models/IRequest";
-
-import { userApi, requestAPI } from "../../../store/service/RequestService";
+import { useAppSelector } from "../../../store/hooks/redux";
+import { USER_REQUEST } from "../../../store/models/dbModels/models";
 
 interface Props {}
 
 export const Main: React.FC<Props> = () => {
-  
-  const { data: user } = userApi.useFetchUserQuery(1);
-  const { data: request } = requestAPI.useFetchRequestQuery(user);
-
+  const reduxRequest = useAppSelector((state) => state.requestReduser);
 
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
-  const [updateRequest, setUpdateRequest] = useState<IRequest | undefined>(
-    request
+  const [updateRequest, setUpdateRequest] = useState<USER_REQUEST | undefined>(
+    reduxRequest.request
   );
 
   useEffect(() => {
-    if (request === undefined) {
+    if (reduxRequest.request === undefined) {
       console.log(999);
       setIsEmpty(true);
     } else {
       console.log(888);
-      console.log(request);
       setIsEmpty(false);
     }
-    setUpdateRequest(request);
-  }, [request]);
+    setUpdateRequest(reduxRequest.request);
+  }, [updateRequest]);
 
   useEffect(() => {
     if (updateRequest === undefined) {
@@ -47,7 +43,7 @@ export const Main: React.FC<Props> = () => {
       <div className={styles.Main}>
         <div>
           <div className={styles.Title}>Мои записи</div>
-          
+
           {!isEmpty ? (
             <UserRequestCard request={updateRequest} isEmpty={setIsEmpty} />
           ) : (
@@ -57,9 +53,7 @@ export const Main: React.FC<Props> = () => {
               </Link>
             </div>
           )}
-          <div className={styles.Content}>
-            
-          </div>
+          <div className={styles.Content}></div>
         </div>
       </div>
     </div>

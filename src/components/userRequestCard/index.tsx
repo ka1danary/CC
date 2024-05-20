@@ -3,10 +3,10 @@ import { CustomButton } from "../CustomButton";
 import { requestAPI } from "../../store/service/RequestService";
 
 import styles from "./index.module.scss";
-import { IRequest } from "../../store/models/IRequest";
+import { USER_REQUEST } from "../../store/models/dbModels/models";
 
 interface Props {
-  request: IRequest | undefined;
+  request: USER_REQUEST | undefined;
   isEmpty: (temp: boolean) => void;
 }
 
@@ -14,7 +14,6 @@ export const UserRequestCard: React.FC<Props> = ({ request, isEmpty }) => {
   const [deleteRequest] = requestAPI.useDeleteRequestMutation();
 
   const handleRemove = (event: React.MouseEvent) => {
-    
     event.stopPropagation();
     isEmpty(true);
     console.log(request?.id);

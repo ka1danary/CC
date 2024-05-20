@@ -77,7 +77,7 @@ export const Request: React.FC<Props> = () => {
       setRightArrowColor("#F4F4F4");
     }
 
-    if (page === 1) {
+    if (page === 2) {
       setStartDateAndTimeHelper(choseStartDate, startTime);
       setEndDateANdTimeHelper(choseStartDate, startTime, packageType);
       //console.log('set', choseStartDate.toISOString())
