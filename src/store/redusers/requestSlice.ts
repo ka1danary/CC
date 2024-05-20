@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { device_type, USER_REQUEST } from "../models/dbModels/models";
-import { requestAPI } from "../service/RequestService";
 
 interface RequestsState {
   request: USER_REQUEST | undefined;
@@ -26,10 +25,6 @@ export const requestSlice = createSlice({
   initialState,
   reducers: {
     getRequest(state, action: PayloadAction<USER_REQUEST[]>) {
-      const { data: req } = requestAPI.useFetchRequestQuery(
-        state.request?.id_user
-      );
-      state.request = req;
       state.requests = action.payload;
     },
     setDeviceTypeReduser(state, action: PayloadAction<device_type | null>) {
@@ -41,24 +36,23 @@ export const requestSlice = createSlice({
     },
     setStartDateAndTimeReduser(state, action: PayloadAction<Date>) {
       if (state.request) {
-        state.request.start_date_and_time = action.payload;
+        state.request.start_date_and_time = action.payload.toISOString();
       } else {
         state.error = "Error setting start date";
       }
     },
     setEndDateAndTimeReduser(state, action: PayloadAction<Date>) {
       if (state.request) {
-        state.request.start_date_and_time = action.payload;
+        state.request.end_date_and_time = action.payload.toISOString();
       } else {
         state.error = "Error setting end date";
       }
     },
     setPlaceReduser(state, action: PayloadAction<number>) {
-      if(state.request) {
-        state.request.id_workstation = action.payload
-      }
-      else {
-        state.error = "Error setting Place";
+      if (state.request) {
+        state.request.id_workstation = action.payload;
+      } else {
+        state.error = "Error setting place";
       }
     },
   },
@@ -68,6 +62,7 @@ export const {
   setDeviceTypeReduser,
   setStartDateAndTimeReduser,
   setEndDateAndTimeReduser,
-  setPlaceReduser
+  setPlaceReduser,
 } = requestSlice.actions;
-export default requestSlice.actions;
+
+export default requestSlice.reducer;

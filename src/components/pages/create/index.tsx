@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./index.module.scss";
@@ -15,7 +15,7 @@ import { buildRequestObject } from "./helperCreate";
 import { format } from "@formkit/tempo";
 
 import { useSetFieldInRequest } from "./hooks/useSetFieldRequest";
-import { setDeviceTypeReduser } from "../../../store/redusers/requestSlice";
+import { package_type } from "../../../store/models/dbModels/models";
 
 interface Props {}
 
@@ -23,8 +23,12 @@ export const Request: React.FC<Props> = () => {
   //const [sendRequest] = requestAPI.useCreateRequestMutation();
 
   const {
-    data : {deviceType, startDate, startTime,}
-  } = useSetFieldInRequest()
+    data: { device, startDate, endDate, indexPlace },
+    setDeviceTypeHelper,
+    setStartDateAndTimeHelper,
+    setEndDateANdTimeHelper,
+    setPlaceHelper,
+  } = useSetFieldInRequest();
 
   //-------------------------------------------------------
   const [page, setPage] = useState<number>(0);
@@ -34,13 +38,12 @@ export const Request: React.FC<Props> = () => {
   //-------------------------------------------------------
 
   //-------------------------------------------------------
-  // const [deviceType, setDeviceType] = useState<device_type | null>(null);
-  // const [startDate, setStartDate] = useState<Date | null>(null);
-  // const [startTime, setStartTime] = useState<number | -1>(-1);
-  // const [packageType, setPackageType] = useState<package_type | null>(null);
-  // const [place, setPlace] = useState<number | null>(null);
 
   //-------------------------------------------------------
+
+  const [choseStartDate, setChoseStartDate] = useState<Date>(new Date());
+  const [startTime, setStartTime] = React.useState<number>(1);
+  const [packageType, setPackage] = React.useState<package_type>(1);
 
   //-------------------------------------------------------
   const [leftArrowColor, setLeftArrowColor] = useState<string>("#F4F4F4");
@@ -82,22 +85,24 @@ export const Request: React.FC<Props> = () => {
           <div className={styles.CreateTypeTitle}>Тип устройства</div>{" "}
           <div className={styles.CreateTypeContent}>
             <TypeSelector
-              setType={setDeviceTypeReduser}
+              setType={setDeviceTypeHelper}
               options={["PC", "PS", "VR"]}
             />
-            <div className={styles.typeSelected}>{deviceType}</div>
+            <div className={styles.typeSelected}>{device}</div>
           </div>
         </div>
       );
     } else if (page === 1) {
+
       return (
         <div className={styles.CreateDate}>
           <div className={styles.CreateTypeTitle}>
             {/* сделать нормально дату */}
             Дата
-            <Calendar setDate={setStartDate} date={startDate} />
-            
-            <div className={styles.dateSelected}>{format((startDate != null ? startDate : new Date()), "full")}</div>
+            <Calendar setDate={setChoseStartDate} date={choseStartDate} />      
+            <div className={styles.dateSelected}>
+              {format(startDate != null ? startDate : new Date(), "full")}
+            </div>
           </div>
           <div>
             <div className={styles.CreateTypeTitle}>Время </div>
@@ -106,7 +111,7 @@ export const Request: React.FC<Props> = () => {
           </div>
           <div>
             <div className={styles.CreateTypeTitle}>Пакет</div>
-            <TypePackage setType={setPackageType} types={[1, 2, 3]} />
+            <TypePackage setType={setPackage} types={[1, 2, 3]} />
             <div className={styles.dateSelected}>{packageType}</div>
           </div>
         </div>
@@ -115,25 +120,26 @@ export const Request: React.FC<Props> = () => {
       return (
         <div className={styles.CreatePlace}>
           <div>
-            <PlaceSwitch setValue={setPlace} value={place} type={deviceType}/>
+            <PlaceSwitch setValue={setPlaceHelper} value={3} type={device} />
           </div>
         </div>
       );
     } else if (page === 3) {
-      const buildedRequest = buildRequestObject(
+      setStartDateAndTimeHelper(choseStartDate, startTime);
+      setEndDateANdTimeHelper(choseStartDate, startTime, packageType);
+      const endRequest = buildRequestObject(
         1,
-        deviceType,
+        device,
         startDate,
-        startTime,
-        packageType,
-        place
+        endDate,
+        indexPlace
       );
 
       return (
         <div className={styles.CreateRequest}>
           <div className={styles.CreateTypeTitle}>Ваша заявка</div>
           <div>
-            <CreateRequestCard request={buildedRequest} />
+            <CreateRequestCard request={endRequest} />
           </div>
           <div>
             <div className={styles.ButonConfirm}>

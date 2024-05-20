@@ -1,6 +1,5 @@
 import {
   device_type,
-  package_type,
   USER_REQUEST,
 } from "../../../store/models/dbModels/models";
 
@@ -8,7 +7,7 @@ export const createRequest = (req: USER_REQUEST) => {
   return req ? req : "error";
 };
 
-// Возврашает выбранную дату + выбранное в отдельном компоненте время 
+// Возврашает выбранную дату + выбранное в отдельном компоненте время
 export const convertDateFromNumberToDate = (hours: number, date: Date) => {
   const newDate = date;
   newDate.setHours(hours, 0, 0, 0);
@@ -18,31 +17,23 @@ export const convertDateFromNumberToDate = (hours: number, date: Date) => {
 // возвращает полный объект типа USER_REQUEST
 export const buildRequestObject = (
   user_id: number,
-  device_type: device_type | null,
-  start_date: Date | null,
-  start_time: number | null,
-  package_type: package_type | null,
-  place: number | null
+  device_type: device_type | undefined,
+  start_date_and_time: Date | undefined | string,
+  end_date_and_time: Date | undefined | string,
+  place: number | undefined
 ) => {
   if (
     device_type &&
-    start_date &&
-    start_time &&
-    package_type &&
-    place != null
+    start_date_and_time &&
+    end_date_and_time &&
+    place != undefined
   ) {
-    const start_full_date = convertDateFromNumberToDate(start_time, start_date);
-    const end_time = start_time + package_type;
-    const end_full_date = convertDateFromNumberToDate(
-      end_time,
-      new Date(start_full_date)
-    );
     const request: USER_REQUEST = {
       id_user_request: user_id,
       id_user: user_id,
       device_type: device_type,
-      start_date_and_time: start_full_date,
-      end_date_and_time: end_full_date,
+      start_date_and_time: start_date_and_time,
+      end_date_and_time: end_date_and_time,
       id_workstation: place,
     };
     console.log(request);
@@ -51,5 +42,3 @@ export const buildRequestObject = (
     return null;
   }
 };
-
-

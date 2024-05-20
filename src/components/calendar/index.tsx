@@ -1,8 +1,8 @@
 import React from "react";
 
 interface Props {
-  date: Date | null;
-  setDate: (date: Date | null) => void;
+  date: Date;
+  setDate: (date: Date) => void;
 }
 
 export const Calendar: React.FC<Props> = ({ date, setDate }) => {

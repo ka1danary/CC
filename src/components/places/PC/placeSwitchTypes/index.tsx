@@ -7,7 +7,7 @@ import { device_type } from "../../../../store/models/dbModels/models";
 interface Props {
   setValue: (place: number) => void;
   value: number | null;
-  type: device_type | null;
+  type: device_type | null | undefined;
 }
 
 export const PlaceSwitch: React.FC<Props> = (props) => {

@@ -56,7 +56,7 @@ export interface USER_REQUEST {
     id_user_request : number,
     id_user : number,
     device_type : device_type, 
-    start_date_and_time : Date,
-    end_date_and_time : Date,
+    start_date_and_time : Date | string,
+    end_date_and_time : Date | string,
     id_workstation : number
 }
