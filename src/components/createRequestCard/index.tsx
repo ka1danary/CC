@@ -4,14 +4,11 @@ import { format } from "@formkit/tempo";
 import styles from "./index.module.scss";
 
 interface Props {
-  request: USER_REQUEST | null;
+  request: USER_REQUEST | undefined;
 }
 
 export const CreateRequestCard: React.FC<Props> = ({ request }) => {
-  const createReadbleDate = (
-    date: Date | undefined,
-    locale: string = "default"
-  ) => {
+  const createReadableDate = (date: Date | undefined, locale: string = "default") => {
     const checkDate = date ? date : new Date();
     const fullDate = format(checkDate, "full");
     const parseTimeFromDate = format(checkDate, "hh:mm", locale);
@@ -21,7 +18,11 @@ export const CreateRequestCard: React.FC<Props> = ({ request }) => {
     };
   };
 
-  console.log(createReadbleDate(request?.end_date_and_time));
+  // Преобразуйте строки в объекты Date
+  const startDate = request?.start_date_and_time ? new Date(request.start_date_and_time) : undefined;
+  const endDate = request?.end_date_and_time ? new Date(request.end_date_and_time) : undefined;
+
+  console.log(createReadableDate(endDate));
 
   return (
     <div className={styles.Container}>
@@ -29,19 +30,19 @@ export const CreateRequestCard: React.FC<Props> = ({ request }) => {
         <div className={styles.Article}>
           <div className={styles.Title}>Дата</div>
           <div className={styles.TitleContent}>
-            {createReadbleDate(request?.start_date_and_time).fullDate}
+            {createReadableDate(startDate).fullDate}
           </div>
         </div>
         <div className={styles.Article}>
           <div className={styles.Title}>С</div>
           <div className={styles.TitleContent}>
-            {createReadbleDate(request?.start_date_and_time).parseTimeFromDate}
+            {createReadableDate(startDate).parseTimeFromDate}
           </div>
         </div>
         <div className={styles.Article}>
           <div className={styles.Title}>До</div>
           <div className={styles.TitleContent}>
-            {createReadbleDate(request?.end_date_and_time).parseTimeFromDate}{" "}
+            {createReadableDate(endDate).parseTimeFromDate}{" "}
           </div>
         </div>
         <div className={styles.Article}>

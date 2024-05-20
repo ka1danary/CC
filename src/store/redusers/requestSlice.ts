@@ -12,8 +12,8 @@ const initialState: RequestsState = {
     id_user_request: 1,
     id_user: 1,
     device_type: "PC",
-    start_date_and_time: new Date(),
-    end_date_and_time: new Date(),
+    start_date_and_time: new Date().toISOString(),
+    end_date_and_time: new Date().toISOString(),
     id_workstation: 1,
   },
   error: "",
@@ -34,16 +34,16 @@ export const requestSlice = createSlice({
         state.error = "Error setting device type";
       }
     },
-    setStartDateAndTimeReduser(state, action: PayloadAction<Date>) {
+    setStartDateAndTimeReduser(state, action: PayloadAction<string>) {
       if (state.request) {
-        state.request.start_date_and_time = action.payload.toISOString();
+        state.request.start_date_and_time = action.payload;
       } else {
         state.error = "Error setting start date";
       }
     },
-    setEndDateAndTimeReduser(state, action: PayloadAction<Date>) {
+    setEndDateAndTimeReduser(state, action: PayloadAction<string>) {
       if (state.request) {
-        state.request.end_date_and_time = action.payload.toISOString();
+        state.request.end_date_and_time = action.payload;
       } else {
         state.error = "Error setting end date";
       }
@@ -55,6 +55,14 @@ export const requestSlice = createSlice({
         state.error = "Error setting place";
       }
     },
+    setRequest(state, action: PayloadAction<USER_REQUEST | undefined>) {
+      if (state.request) {
+        state.request = action.payload;
+        console.log('Объект создан', action.payload)
+      } else {
+        state.error = "Error setting REQUEST";
+      }
+    },
   },
 });
 
@@ -63,6 +71,7 @@ export const {
   setStartDateAndTimeReduser,
   setEndDateAndTimeReduser,
   setPlaceReduser,
+  setRequest,
 } = requestSlice.actions;
 
 export default requestSlice.reducer;

@@ -28,6 +28,8 @@ export const Request: React.FC<Props> = () => {
     setStartDateAndTimeHelper,
     setEndDateANdTimeHelper,
     setPlaceHelper,
+    setFullRequest
+    
   } = useSetFieldInRequest();
 
   //-------------------------------------------------------
@@ -74,6 +76,12 @@ export const Request: React.FC<Props> = () => {
       setButtonForwardDisable(true);
       setRightArrowColor("#F4F4F4");
     }
+
+    if (page === 1) {
+      setStartDateAndTimeHelper(choseStartDate, startTime);
+      setEndDateANdTimeHelper(choseStartDate, startTime, packageType);
+      //console.log('set', choseStartDate.toISOString())
+    }
   }, [page]);
 
   //-------------------------------------------------------
@@ -93,13 +101,12 @@ export const Request: React.FC<Props> = () => {
         </div>
       );
     } else if (page === 1) {
-
       return (
         <div className={styles.CreateDate}>
           <div className={styles.CreateTypeTitle}>
             {/* сделать нормально дату */}
             Дата
-            <Calendar setDate={setChoseStartDate} date={choseStartDate} />      
+            <Calendar setDate={setChoseStartDate} date={choseStartDate} />
             <div className={styles.dateSelected}>
               {format(startDate != null ? startDate : new Date(), "full")}
             </div>
@@ -125,8 +132,9 @@ export const Request: React.FC<Props> = () => {
         </div>
       );
     } else if (page === 3) {
-      setStartDateAndTimeHelper(choseStartDate, startTime);
-      setEndDateANdTimeHelper(choseStartDate, startTime, packageType);
+
+      
+
       const endRequest = buildRequestObject(
         1,
         device,
@@ -143,7 +151,7 @@ export const Request: React.FC<Props> = () => {
           </div>
           <div>
             <div className={styles.ButonConfirm}>
-              <Link to="/">
+              <Link to="/" onClick={() => setFullRequest(endRequest)}>
                 <CustomButton type={"White"} title="Подтвердить" />
               </Link>
             </div>

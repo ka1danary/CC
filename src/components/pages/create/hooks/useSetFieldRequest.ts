@@ -1,10 +1,15 @@
-import { device_type, package_type } from "./../../../../store/models/dbModels/models";
+import {
+  device_type,
+  package_type,
+  USER_REQUEST,
+} from "./../../../../store/models/dbModels/models";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks/redux";
 import {
   setDeviceTypeReduser,
   setStartDateAndTimeReduser,
   setEndDateAndTimeReduser,
   setPlaceReduser,
+  setRequest,
 } from "../../../../store/redusers/requestSlice";
 import { convertDateFromNumberToDate } from "../helperCreate";
 import React from "react";
@@ -35,7 +40,10 @@ export const useSetFieldInRequest = () => {
 
   // set Session Start Time
   const setStartDateAndTimeHelper = (startDateAndTime: Date, time: number) => {
-    const date = convertDateFromNumberToDate(time, startDateAndTime);
+    const date = convertDateFromNumberToDate(
+      time,
+      startDateAndTime
+    ).toISOString();
     setStartDate(date);
     dispatch(setStartDateAndTimeReduser(date));
     console.log("set" + date);
@@ -47,9 +55,12 @@ export const useSetFieldInRequest = () => {
     time: number,
     nextTime: package_type
   ) => {
-    const date = convertDateFromNumberToDate(time + nextTime, endDateAndTime);
-    dispatch(setEndDateAndTimeReduser(date));
+    const date = convertDateFromNumberToDate(
+      time + nextTime,
+      endDateAndTime
+    ).toISOString();
     setEndDate(date);
+    dispatch(setEndDateAndTimeReduser(date));
   };
 
   // set Place index
@@ -58,6 +69,9 @@ export const useSetFieldInRequest = () => {
     dispatch(setPlaceReduser(place));
   };
 
+  const setFullRequest = (req: USER_REQUEST | undefined) => {
+    dispatch(setRequest(req));
+  };
   return {
     data: {
       device,
@@ -69,5 +83,6 @@ export const useSetFieldInRequest = () => {
     setStartDateAndTimeHelper,
     setEndDateANdTimeHelper,
     setPlaceHelper,
+    setFullRequest,
   };
 };

@@ -39,6 +39,6 @@ export const buildRequestObject = (
     console.log(request);
     return request;
   } else {
-    return null;
+    return undefined;
   }
 };
