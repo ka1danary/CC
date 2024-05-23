@@ -1,24 +1,32 @@
+import React from "react";
 import styles from "./index.module.scss";
 
 interface Props {
   type: "Delete" | "Upload" | "Back" | "White" | "Cancel";
-  title: string | undefined;
+  title?: string;
 }
 
-export const CustomButton: React.FC<Props> = ({ title, type }) => {
-  let root = styles.CustomButton;
+export const CustomButton: React.FC<Props> = ({ title = "Button", type }) => {
+  const getButtonClass = () => {
+    switch (type) {
+      case "Delete":
+        return styles.Delete;
+      case "Upload":
+        return styles.Upload;
+      case "Back":
+        return styles.Back;
+      case "White":
+        return styles.White;
+      case "Cancel":
+        return styles.Cancel;
+      default:
+        return "";
+    }
+  };
 
-  if (type === "Delete") {
-    root += ` ${styles.Delete}`;
-  } else if (type === "Upload") {
-    root += ` ${styles.Upload}`;
-  } else if (type === "Back") {
-    root += ` ${styles.Back}`;
-  } else if (type === "White") {
-    root += ` ${styles.White}`;
-  } else if (type === "Cancel") {
-    root += ` ${styles.Cancel}`;
-  }
-
-  return <button className={root}>{title}</button>;
+  return (
+    <button className={`${styles.CustomButton} ${getButtonClass()}`}>
+      {title}
+    </button>
+  );
 };

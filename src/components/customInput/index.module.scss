@@ -1,5 +1,10 @@
+.Content {
+    display: flex;
+    flex-direction: column;
+}
+
 .CustomInput {
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     font-size: 1em;
     padding: 7px;
     color: rgb(119, 119, 119);
@@ -11,30 +16,28 @@
     padding-left: 10px;
     transition: background-color 0.2s, color 0.2s, opacity 0.2s;
 
-    &:focus{
+    &:focus {
         background-color: #ffffff;
+        color: #000000;
     }
+
     &:hover {
         color: rgb(211, 211, 211);
     }
+
     &::placeholder {
+        color: rgb(169, 169, 169);
+        transition: color 0.2s;
 
-        &:hover {
-            color: #ffffff;
-        }
-
-        &:active {
-            color: #ffffff;
-        }
-
+        &:hover,
+        &:active,
         &:focus {
             color: #ffffff;
         }
     }
+}
 
-    &:focus {
-        color: #000000;
-    }
-
-
+.Message {
+    margin-top: 5px;
+    color: red; // можно задать цвет сообщения или другой стиль
 }

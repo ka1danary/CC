@@ -1,9 +1,10 @@
 import { format } from "@formkit/tempo";
 import { CustomButton } from "../CustomButton";
-import { requestAPI } from "../../store/service/RequestService";
+import { USER_REQUEST } from "../../store/models/dbModels/models";
 
 import styles from "./index.module.scss";
-import { USER_REQUEST } from "../../store/models/dbModels/models";
+import { deleteRequest } from "../../store/redusers/requestSlice";
+import { useAppDispatch } from "../../store/hooks/redux";
 
 interface Props {
   request: USER_REQUEST | undefined;
@@ -11,21 +12,18 @@ interface Props {
 }
 
 export const UserRequestCard: React.FC<Props> = ({ request, isEmpty }) => {
-  const [deleteRequest] = requestAPI.useDeleteRequestMutation();
+  
+  const dispatch = useAppDispatch();
 
   const handleRemove = (event: React.MouseEvent) => {
     event.stopPropagation();
     isEmpty(true);
-    console.log(request?.id);
-    deleteRequest(request);
-    console.log(request);
+    dispatch(deleteRequest())
   };
 
-  const convertDate = () => {
-    const date = request?.date;
+  const convertDate = (date: Date | undefined | string) => {
     if (date != undefined) {
       return format(date, { date: "full", time: "short" });
-      console.log(9);
     } else {
       return "";
     }
@@ -36,19 +34,19 @@ export const UserRequestCard: React.FC<Props> = ({ request, isEmpty }) => {
       <div className={styles.Content}>
         <div className={styles.ContentBox}>
           <div className={styles.ContentBoxTitle}> Тип устройства: </div>
-          <div> {request?.deviceType}</div>
+          <div> {request?.device_type}</div>
         </div>
         <div className={styles.ContentBox}>
-          <div className={styles.ContentBoxTitle}> Дата: </div>
-          <div> {convertDate()}</div>
+          <div className={styles.ContentBoxTitle}> C: </div>
+          <div> {convertDate(request?.start_date_and_time)}</div>
         </div>
         <div className={styles.ContentBox}>
-          <div className={styles.ContentBoxTitle}> Длительность: </div>
-          <div> {request?.packageType} ч</div>
+          <div className={styles.ContentBoxTitle}> До: </div>
+          <div> {convertDate(request?.end_date_and_time)} ч</div>
         </div>
         <div className={styles.ContentBox}>
           <div className={styles.ContentBoxTitle}> Место: </div>
-          <div> {request?.place}</div>
+          <div> {request?.id_workstation}</div>
         </div>
       </div>
       <div className={styles.DeleteButton} onClick={handleRemove}>

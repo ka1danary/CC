@@ -1,59 +1,53 @@
-.Upload {
-    color: #05141B;
+.CustomButton {
     font-weight: 500;
-    background-color: #C4C8C7;
-    padding: 20px;
     font-size: 1.3em;
     border-radius: 10px;
     transition: opacity 0.3s;
-    width: 70vw;
-    min-width: 500px;
 
-    &:hover {
-        opacity: 0.8;
+    &.Upload {
+        color: #05141B;
+        background-color: #C4C8C7;
+        padding: 20px;
+        width: 70vw;
+        min-width: 500px;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
-}
 
-.White {
-    border: 1px #a7a7a7 solid;
-    font-weight: 500;
-    font-size: 1.3em;
-    background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 5px;
-    transition: opacity 0.3s;
-    height: 4vh;
-    width: 15vw;
-    min-width: 200px;
+    &.White {
+        border: 1px #a7a7a7 solid;
+        background-color: white;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 5px;
+        height: 4vh;
+        width: 15vw;
+        min-width: 200px;
 
-    &:hover {
-        opacity: 0.8;
+        &:hover {
+            opacity: 0.8;
+        }
     }
-}
 
-.Delete {
-    background-color: #2e2e2e;
-    color: white;
+    &.Delete {
+        background-color: #2e2e2e;
+        color: white;
+        width: 100vw;
+        padding: 20px;
 
-    width: 100vw;
-    padding: 20px;
-    border-radius: 10px;
-    transition: opacity 0.3s;
-
-    &:hover {
-        opacity: 0.8;
+        &:hover {
+            opacity: 0.8;
+        }
     }
-}
 
-.Cancel {
-    width: 17vw;
-    color: rgb(53, 53, 53);
-    font-weight: 500;
-    border-radius: 10px;
-    border: 1px solid gray;
-    font-size: 1.3em;
-    background-color: #ffffff;
-    height: 4vh;
-    ;
+    &.Cancel {
+        width: 17vw;
+        color: rgb(53, 53, 53);
+        border: 1px solid gray;
+        background-color: #ffffff;
+        height: 4vh;
+    }
+
 }

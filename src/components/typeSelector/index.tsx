@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 
 interface Props {
   options: device_type[];
-  setType: (type: device_type | null) => void;
+  setType: (type: device_type | undefined) => void;
 }
 
 export const TypeSelector: React.FC<Props> = ({ options, setType }) => {

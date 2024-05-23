@@ -5,7 +5,7 @@ import requestReduser from './redusers/requestSlice'
 
 const rootReduser = combineReducers({
     requestReduser,
-    // rtc query
+    // rtq query
     [requestAPI.reducerPath]: requestAPI.reducer,
     [userApi.reducerPath]: userApi.reducer
 })

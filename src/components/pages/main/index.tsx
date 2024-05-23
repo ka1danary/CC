@@ -4,7 +4,6 @@ import { Header } from "../../header";
 import { UserRequestCard } from "../../userRequestCard";
 import { CustomButton } from "../../CustomButton";
 import { Link } from "react-router-dom";
-import { IRequest } from "../../../store/models/IRequest";
 import { useAppSelector } from "../../../store/hooks/redux";
 import { USER_REQUEST } from "../../../store/models/dbModels/models";
 
@@ -19,11 +18,12 @@ export const Main: React.FC<Props> = () => {
   );
 
   useEffect(() => {
+    
     if (reduxRequest.request === undefined) {
-      console.log(999);
+      console.log('empty request');
       setIsEmpty(true);
     } else {
-      console.log(888);
+      console.log('equest has already been created');
       setIsEmpty(false);
     }
     setUpdateRequest(reduxRequest.request);

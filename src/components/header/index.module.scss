@@ -1,24 +1,36 @@
 .Header {
-    background-color: #06141B;
+    background-color: #06141b;
     position: sticky;
     color: white;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: flex-end; 
     width: 100vw;
     height: 7vh;
-    &Right {
-        margin-right: 30px;
-        display: flex;
-        align-items: center;
-        transition: opacity 0.4s;
-        &:hover {
-            opacity: 0.6;
-        }
-        &Login {
-            margin-right: 20px;
-            color: white;
-            justify-content: right;
-        }
+  }
+  
+  .HeaderRightContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+  
+  .HeaderRight {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.4s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+  
+    &:hover {
+      opacity: 0.6;
     }
-}
+  }
+  
+  .HeaderRightLogin {
+    margin-right: 20px;
+    color: white;
+  }
+  

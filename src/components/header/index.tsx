@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { userApi } from "../../store/service/RequestService";
 
@@ -6,6 +7,8 @@ import styles from "./index.module.scss";
 interface Props {}
 
 export const Header: React.FC<Props> = () => {
+
+  // сюда загрузить айдишник пользователя потом
   const { data: user } = userApi.useFetchUserQuery(1);
 
   return (

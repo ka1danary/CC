@@ -1,49 +1,42 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Main } from "../components/pages/main";
 import { Request } from "../components/pages/create";
-
-import styles from "./index.module.scss";
 import { FEFUAuthorization } from "../components/pages/fefu_authorization";
-//import { useDispatch } from "react-redux";
-//import { useAppSelector } from "../store/hooks/redux";
+import styles from "./index.module.scss";
+import { useAppSelector } from "../store/hooks/redux";
 
-function App() {
+const App: React.FC = () => {
+
+  // navigation 
+
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const reduxRequest = useAppSelector((state) => state.requestReduser);
+  console.log(reduxRequest)
 
   const handleLogin = (val: boolean) => {
     setIsLoggedIn(val);
   };
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn) {
-      return navigate("/");
+      navigate("/");
     } else {
-      return navigate("/auth");
+      navigate("/auth");
     }
   }, [isLoggedIn]);
 
-  //const dispatch = useDispatch()
-  //const {request} = useAppSelector(state => state.requestReduser)
-
   return (
-    <div>
-      <div className={styles.App}>
-        <div>
-        
-        </div>
-        <Routes>
-          <Route element={<Main />} path="/" />
-          <Route
-            element={<FEFUAuthorization setAuth={handleLogin} />}
-            path="/auth"
-          />
-          <Route path="/create" element={<Request />} />
-        </Routes>
-      </div>
+    <div className={styles.App}>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/auth" element={<FEFUAuthorization setAuth={handleLogin} />} />
+        <Route path="/create" element={<Request />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;

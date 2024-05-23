@@ -36,11 +36,7 @@ export const PlaceSwitch: React.FC<Props> = (props) => {
           </div>
         );
       }
-    } else if (props.type === "VR") {
-      return <div>VR</div>;
-    } else if (props.type === "PS") {
-      return <div>PS</div>;
-    }
+    } 
   };
 
   const pageIncrement = () => {

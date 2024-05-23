@@ -12,7 +12,8 @@ export const Calendar: React.FC<Props> = ({ date, setDate }) => {
   };
 
   // Преобразуем объект Date обратно в строку для использования в атрибуте value input
-  const formatedDate = date instanceof Date ? date.toISOString().split("T")[0] : '';
+  const formatedDate =
+    date instanceof Date ? date.toISOString().split("T")[0] : "";
 
   return (
     <div>

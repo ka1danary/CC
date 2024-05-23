@@ -31,11 +31,18 @@ export const useSetFieldInRequest = () => {
     reduxRequest.request?.id_workstation
   );
 
+  React.useEffect(() => {
+    setDevice(reduxRequest.request?.device_type)
+    console.log('useEffect',reduxRequest.request?.device_type)
+  }, [reduxRequest.request?.device_type])
+
+
   // set Device type
-  const setDeviceTypeHelper = (type: device_type | null) => {
+  const setDeviceTypeHelper = (type: device_type | undefined) => {
+    type ? console.log(type) : console.log(false)
     dispatch(setDeviceTypeReduser(type));
-    setDevice(reduxRequest.request?.device_type);
-    console.log("set" + type);
+    setDevice(type);
+    //console.log("set", type);
   };
 
   // set Session Start Time
