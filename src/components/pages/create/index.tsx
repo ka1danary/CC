@@ -76,7 +76,9 @@ export const Request: React.FC<Props> = () => {
         return (
           <div className={styles.CreateDate}>
             <div className={styles.CreateTypeTitle}>Дата</div>
-            <Calendar setDate={setChoseStartDate} date={choseStartDate} />
+            <div className={styles.CreateTypeTitle}>
+              <Calendar setDate={setChoseStartDate} date={choseStartDate} />
+            </div>
             <div className={styles.dateSelected}>
               {format(startDate != null ? startDate : new Date(), "full")}
             </div>
